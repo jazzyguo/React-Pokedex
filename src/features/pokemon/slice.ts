@@ -1,21 +1,16 @@
-import { createSlice, SerializedError } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit'
 
 import { fetchPokemons } from './thunks'
 
 export const name = 'pokemon'
 
-type State = {
-    count: number
-    data: Pokemon[]
-    status: 'idle' | 'loading' | 'ready' | 'error'
-    error: SerializedError | null
-}
-
-export const initialState: State = {
+export const initialState: PokemonReducerState = {
     count: 0,
+    offset: 0,
+    limit: 20,
     data: [],
     status: 'idle',
-    error: null,
+    error: undefined,
 }
 
 const pokemonSlice = createSlice({
@@ -23,18 +18,20 @@ const pokemonSlice = createSlice({
     initialState,
     reducers: {},
     extraReducers: (builder) => {
-        builder.addCase(fetchPokemons.pending, (state) => {
-            state.error = null
+        builder.addCase(fetchPokemons.pending, (state, { meta }) => {
+            state.error = undefined
             state.status = 'loading'
+            state.offset = meta.arg.offset
+            state.limit = meta.arg.limit
         })
         builder.addCase(fetchPokemons.fulfilled, (state, { payload }) => {
             state.data = payload.results || []
             state.count = payload.count || 0
-            state.error = null
+            state.error = undefined
             state.status = 'ready'
         })
         builder.addCase(fetchPokemons.rejected, (state, { error }) => {
-            state.error = error
+            state.error = error.message
             state.status = 'error'
         })
     },

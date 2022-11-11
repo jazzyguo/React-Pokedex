@@ -13,7 +13,13 @@ const fetchPokemons = createAsyncThunk<
     }
 >(
     'pokemon/fetchPokemons',
-    async ({ offset = 0, limit = 20 }, { rejectWithValue }) => {
+    async (
+        { offset, limit } = {
+            offset: 0,
+            limit: 20,
+        },
+        { rejectWithValue }
+    ) => {
         try {
             const response = await fetch(
                 `${POKEMON_LIST_URL}?offset=${offset}&limit=${limit}`
@@ -30,6 +36,7 @@ const fetchPokemons = createAsyncThunk<
                 throw new Error('Error fetching pokemons')
             }
         } catch (error) {
+            console.log(error)
             return rejectWithValue(error)
         }
     }

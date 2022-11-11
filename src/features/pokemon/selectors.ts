@@ -1,6 +1,11 @@
 import { createSelector } from '@reduxjs/toolkit'
 
-const selectSelf = (state) => state['pokemon']
+const selectSelf = (state: { pokemon: PokemonReducerState }) => state['pokemon']
+
+export const selectStatusIdle = createSelector(
+    selectSelf,
+    (state) => state.status === 'idle'
+)
 
 export const selectStatusLoading = createSelector(
     selectSelf,
@@ -12,12 +17,9 @@ export const selectStatusReady = createSelector(
     (state) => state?.status === 'ready'
 )
 
-export const selectError = createSelector(
-    selectSelf,
-    (state) => state?.error
-)
+export const selectError = createSelector(selectSelf, (state) => state?.error)
 
-export const selectPokemons = createSelector(
+export const selectPokemonData = createSelector(
     selectSelf,
     (state) => state?.data || []
 )
