@@ -43,14 +43,11 @@ const useInfiniteScroller = ({
     const data = useSelector(dataSelector)
     const isLoading = useSelector(loadingSelector)
     const hasNext = useSelector(hasNextSelector)
-    const offset = useSelector(offsetSelector)
-
-    const [currOffset, setCurrOffset] = useState(offset)
+    const currOffset = useSelector(offsetSelector)
 
     const fetchData = useCallback(() => {
         if (isLoading || !hasNext) return
         dispatch(fetchAction({ offset: currOffset, limit }))
-        setCurrOffset(currOffset + limit)
     }, [currOffset, limit, dispatch, fetchAction, isLoading, hasNext])
 
     // on mount, we make sure there is enough data mounted to render a scrollbar

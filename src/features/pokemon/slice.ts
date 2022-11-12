@@ -30,6 +30,7 @@ const pokemonSlice = createSlice({
             state.data = [...state.data, ...(payload.results || [])]
             state.count = payload.count || 0
             state.next = payload.next || null
+            state.offset = state.offset + state.limit
             state.error = undefined
             state.status = 'ready'
         })

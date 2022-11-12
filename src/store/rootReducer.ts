@@ -3,10 +3,8 @@ import {
     pokemonSliceReducer,
 } from '../features/pokemon/slice'
 
-
 export const initialAppState = {
     ...pokemonSliceInitialState,
-
 }
 
 const rootReducer = {
