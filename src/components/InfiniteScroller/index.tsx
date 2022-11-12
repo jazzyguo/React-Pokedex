@@ -17,7 +17,7 @@ const InfiniteScroller = ({
             fetchData()
         }
     }, [fetchData])
-    console.log(loading)
+
     useEffect(() => {
         window.addEventListener('scroll', handleScroll)
         return () => window.removeEventListener('scroll', handleScroll)

@@ -2,6 +2,11 @@ type Pokemon = {
     name: string
     id?: number
     abilities?: Ability[]
+    types?: PokemonType[]
+}
+
+type PokemonType = {
+    name: string
 }
 
 type Ability = {
