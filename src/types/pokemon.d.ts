@@ -3,6 +3,7 @@ type Pokemon = {
     id?: number
     abilities?: Ability[]
     types?: PokemonType[]
+    stats?: Stat[]
 }
 
 type PokemonType = {
@@ -11,6 +12,13 @@ type PokemonType = {
 
 type Ability = {
     ability: {
+        name: string
+    }
+}
+
+type Stat = {
+    base_stat: number
+    stat: {
         name: string
     }
 }

@@ -11,7 +11,7 @@ import Root from './root'
 import PokemonIdAbilitiesPage from 'pages/pokemon/[id]/abilities'
 
 const IndexPage = React.lazy(() => import('pages/index'))
-const PokemonIdLayout = React.lazy(() => import('components/PokemonId/Layout'))
+const PokemonIdLayout = React.lazy(() => import('layouts/PokemonIdLayout'))
 
 const router = createBrowserRouter([
     {
@@ -23,7 +23,7 @@ const router = createBrowserRouter([
                 element: <IndexPage />,
             },
             {
-                element: <PokemonIdLayout />,
+                element: <PokemonIdLayout />, 
                 children: [
                     {
                         path: 'pokemon/:id/',

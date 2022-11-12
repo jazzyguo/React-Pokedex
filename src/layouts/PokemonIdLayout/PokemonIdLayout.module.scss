@@ -38,6 +38,9 @@
 }
 
 .content {
+    display: grid;
+    grid-template-columns: max-content;
+    column-gap: 2rem;
     padding: 0 3rem;
 
     &_title {
@@ -45,6 +48,7 @@
         height: max-content;
         width: max-content;
         flex-direction: column;
+        grid-column: 1;
 
         > div {
             display: flex;
@@ -71,6 +75,7 @@
     &_types {
         display: flex;
         margin-top: 0.5rem;
+        grid-column: 1;
 
         > div {
             display: flex;

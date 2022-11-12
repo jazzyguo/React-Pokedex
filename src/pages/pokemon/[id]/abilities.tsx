@@ -1,6 +1,6 @@
 import React from 'react'
 
-import PokemonIdAbilities from 'components/PokemonId/Abilities'
+import PokemonIdAbilities from 'layouts/PokemonIdLayout/components/Abilities'
 
 const PokemonIdAbilitiesPage = () => <PokemonIdAbilities />
 
