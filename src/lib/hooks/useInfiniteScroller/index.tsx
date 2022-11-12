@@ -1,12 +1,11 @@
 import React, { useCallback, useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
-const InfiniteScroller = ({ children = null, fetchData = () => {} }) => {
-    useEffect(() => {
-        window.addEventListener('scroll', handleScroll)
-        return () => window.removeEventListener('scroll', handleScroll)
-    }, [])
-
+const InfiniteScroller = ({
+    className = '',
+    children = null,
+    fetchData = () => {},
+}) => {
     const handleScroll = useCallback(() => {
         const { scrollTop, scrollHeight, clientHeight } =
             document.documentElement
@@ -15,7 +14,12 @@ const InfiniteScroller = ({ children = null, fetchData = () => {} }) => {
         }
     }, [fetchData])
 
-    return <div>{children}</div>
+    useEffect(() => {
+        window.addEventListener('scroll', handleScroll)
+        return () => window.removeEventListener('scroll', handleScroll)
+    }, [handleScroll])
+
+    return <div className={className}>{children}</div>
 }
 
 /**
@@ -31,15 +35,17 @@ const useInfiniteScroller = ({
     dataSelector = () => [],
     loadingSelector = () => false,
     hasNextSelector = () => false,
+    offsetSelector = () => 0,
     limit = 20,
 }) => {
     const dispatch = useDispatch()
 
-    const [currOffset, setCurrOffset] = useState(0)
-
     const data = useSelector(dataSelector)
     const isLoading = useSelector(loadingSelector)
     const hasNext = useSelector(hasNextSelector)
+    const offset = useSelector(offsetSelector)
+
+    const [currOffset, setCurrOffset] = useState(offset)
 
     const fetchData = useCallback(() => {
         if (isLoading || !hasNext) return
@@ -56,8 +62,12 @@ const useInfiniteScroller = ({
     }, [hasNext, fetchData])
 
     return {
-        InfiniteScroller: ({ children }) => (
-            <InfiniteScroller fetchData={fetchData} children={children} />
+        InfiniteScroller: ({ children, className }) => (
+            <InfiniteScroller
+                className={className}
+                fetchData={fetchData}
+                children={children}
+            />
         ),
         data,
     }

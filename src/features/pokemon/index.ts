@@ -6,6 +6,8 @@ export {
     selectError,
     selectCount,
     selectHasNext,
+    selectOffset,
+    selectPokemonById,
 } from './selectors'
 
-export { fetchPokemons } from './thunks'
+export { fetchPokemons, fetchPokemon } from './thunks'

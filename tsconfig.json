@@ -17,7 +17,8 @@
       "paths": {
         "components/*": ["components/*"],
         "features/*": ["features/*"],
-        "hooks/*": ["hooks/*"],
+        "lib/*": ["lib/*"],
+        "pages/*": ["pages/*"],
       },  
       // Source Map
       "sourceMap": true, // enables the use of source maps for debuggers and error reporting etc

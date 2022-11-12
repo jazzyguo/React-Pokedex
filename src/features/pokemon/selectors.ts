@@ -34,3 +34,26 @@ export const selectHasNext = createSelector(
     selectStatusIdle,
     (state, isInit) => state?.next !== null || isInit
 )
+
+export const selectOffset = createSelector(
+    selectSelf,
+    (state) => state?.offset || 0
+)
+
+export const selectSelectedPokemon = createSelector(
+    selectSelf,
+    (state) => state?.selectedPokemon
+)
+
+export const selectPokemonById = createSelector(
+    selectPokemonData,
+    selectSelectedPokemon,
+    (_: any, id: string) => id,
+    (data: Pokemon[], selectedPokemon: Pokemon, id: string) => {
+        if (selectedPokemon && selectedPokemon.id === parseInt(id)) {
+            return selectedPokemon
+        }
+
+        return data.find((pokemon: Pokemon) => pokemon.id === parseInt(id))
+    }
+)
