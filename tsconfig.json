@@ -19,6 +19,7 @@
         "features/*": ["features/*"],
         "lib/*": ["lib/*"],
         "pages/*": ["pages/*"],
+        "assets/*": ["assets/*"]
       },  
       // Source Map
       "sourceMap": true, // enables the use of source maps for debuggers and error reporting etc

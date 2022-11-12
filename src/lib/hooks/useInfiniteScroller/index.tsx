@@ -1,26 +1,7 @@
 import React, { useCallback, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
-const InfiniteScroller = ({
-    className = '',
-    children = null,
-    fetchData = () => {},
-}) => {
-    const handleScroll = useCallback(() => {
-        const { scrollTop, scrollHeight, clientHeight } =
-            document.documentElement
-        if (scrollTop + clientHeight >= scrollHeight) {
-            fetchData()
-        }
-    }, [fetchData])
-
-    useEffect(() => {
-        window.addEventListener('scroll', handleScroll)
-        return () => window.removeEventListener('scroll', handleScroll)
-    }, [handleScroll])
-
-    return <div className={className}>{children}</div>
-}
+import InfiniteScroller from 'components/InfiniteScroller'
 
 /**
  *
@@ -36,7 +17,7 @@ const useInfiniteScroller = ({
     loadingSelector = () => false,
     hasNextSelector = () => false,
     offsetSelector = () => 0,
-    limit = 40,
+    limit = 100,
 }) => {
     const dispatch = useDispatch()
 
@@ -64,6 +45,7 @@ const useInfiniteScroller = ({
                 className={className}
                 fetchData={fetchData}
                 children={children}
+                loading={isLoading}
             />
         ),
         data,
