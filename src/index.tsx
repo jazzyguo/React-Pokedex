@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Suspense } from 'react'
 import ReactDOM from 'react-dom/client'
 import './index.css'
 
@@ -23,6 +23,8 @@ const router = createBrowserRouter([
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
     <Provider store={store}>
-        <RouterProvider router={router} />
+        <Suspense fallback={null}>
+            <RouterProvider router={router} />
+        </Suspense>
     </Provider>
 )

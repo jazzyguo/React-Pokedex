@@ -28,7 +28,7 @@ const PokemonList = () => {
     return (
         <InfiniteScroller className={styles.pokemonList}>
             {data.map((pokemon) => {
-                const number = (pokemon.url || '').split('/')[6] || pokemon.id
+                const number = pokemon.id || (pokemon.url || '').split('/')[6]
                 return (
                     <div
                         key={pokemon.name}
