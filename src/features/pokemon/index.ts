@@ -5,6 +5,7 @@ export {
     selectStatusReady,
     selectError,
     selectCount,
+    selectHasNext,
 } from './selectors'
 
 export { fetchPokemons } from './thunks'

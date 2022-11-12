@@ -1,35 +1,28 @@
-import React, { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import React from 'react'
+
+import useInfiniteScroller from 'hooks/useInfiniteScroller'
 
 import {
     fetchPokemons,
-    selectStatusIdle,
+    selectStatusLoading,
     selectPokemonData,
+    selectHasNext,
 } from 'features/pokemon'
 
 const PokemonList = () => {
-    const dispatch = useDispatch()
-
-    const isStatusIdle = useSelector(selectStatusIdle)
-    const pokemonData: Pokemon[] = useSelector(selectPokemonData)
-
-    useEffect(() => {
-        if (isStatusIdle) {
-            dispatch(
-                fetchPokemons({
-                    offset: 0,
-                    limit: 20,
-                })
-            )
-        }
-    }, [isStatusIdle, dispatch])
+    const { InfiniteScroller, data } = useInfiniteScroller({
+        fetchAction: fetchPokemons,
+        dataSelector: selectPokemonData,
+        loadingSelector: selectStatusLoading,
+        hasNextSelector: selectHasNext,
+    })
 
     return (
-        <div>
-            {pokemonData.map((pokemon) => (
+        <InfiniteScroller>
+            {data.map((pokemon) => (
                 <div key={pokemon.id}>{pokemon.name}</div>
             ))}
-        </div>
+        </InfiniteScroller>
     )
 }
 

@@ -5,6 +5,7 @@ import { POKEMON_LIST_URL } from '../constants'
 const fetchPokemons = createAsyncThunk<
     {
         count: number
+        next: string | null
         results: Pokemon[]
     },
     { offset: number; limit: number },
@@ -26,11 +27,12 @@ const fetchPokemons = createAsyncThunk<
             )
 
             if (response.status === 200) {
-                const { count, results } = await response.json()
+                const { count, results, next } = await response.json()
 
                 return {
                     count,
                     results,
+                    next,
                 }
             } else {
                 throw new Error('Error fetching pokemons')

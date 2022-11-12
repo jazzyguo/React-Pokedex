@@ -11,6 +11,7 @@ export const initialState: PokemonReducerState = {
     data: [],
     status: 'idle',
     error: undefined,
+    next: null,
 }
 
 const pokemonSlice = createSlice({
@@ -25,8 +26,9 @@ const pokemonSlice = createSlice({
             state.limit = meta.arg.limit
         })
         builder.addCase(fetchPokemons.fulfilled, (state, { payload }) => {
-            state.data = payload.results || []
+            state.data = [...state.data, ...(payload.results || [])]
             state.count = payload.count || 0
+            state.next = payload.next || null
             state.error = undefined
             state.status = 'ready'
         })

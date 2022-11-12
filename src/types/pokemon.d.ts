@@ -9,4 +9,5 @@ type PokemonReducerState = {
     data: Pokemon[]
     status: 'idle' | 'loading' | 'ready' | 'error'
     error: string | undefined
+    next: string | null
 }

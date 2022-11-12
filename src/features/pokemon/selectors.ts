@@ -28,3 +28,9 @@ export const selectCount = createSelector(
     selectSelf,
     (state) => state?.count || 0
 )
+
+export const selectHasNext = createSelector(
+    selectSelf,
+    selectStatusIdle,
+    (state, isInit) => state?.next !== null || isInit
+)
