@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 
@@ -10,12 +10,15 @@ import { unslug } from 'lib/utils/strings'
 import { getSpriteImageUrl } from 'lib/utils/image'
 
 import pokeball from 'assets/images/pokeball.png'
+import shiny from 'assets/images/shiny.png'
 
 import { TYPE_COLORS } from 'lib/constants/pokemonTypes'
 
 import styles from './PokemonDetails.module.scss'
 
 const PokemonDetails = () => {
+    const [showShiny, setShowShiny] = useState(false)
+
     const dispatch = useDispatch()
 
     const { id: pokemonId } = useParams()
@@ -36,7 +39,12 @@ const PokemonDetails = () => {
 
     const { name, id, types = [] } = pokemonData
 
-    const imageUrl = getSpriteImageUrl(id)
+    const spriteUrl = getSpriteImageUrl(id)
+    const shinySpriteUrl = getSpriteImageUrl(id, {
+        shiny: true,
+    })
+
+    const imageUrl = showShiny ? shinySpriteUrl : spriteUrl
 
     return (
         <div className={styles.container}>
@@ -49,7 +57,13 @@ const PokemonDetails = () => {
                     }, #fff)`,
                 }}
             >
-                <img src={imageUrl} alt={name} />
+                <img src={imageUrl} alt={name} className={styles.sprite} />
+                <img
+                    onClick={() => setShowShiny(!showShiny)}
+                    src={shiny}
+                    alt="shiny"
+                    className={styles.shiny}
+                />
             </div>
             <div className={styles.content}>
                 <div className={styles.content_title}>
@@ -68,7 +82,7 @@ const PokemonDetails = () => {
                         } catch (e) {
                             console.log(e)
                         }
-                        
+
                         return (
                             <div
                                 key={type.name}
