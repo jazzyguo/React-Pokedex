@@ -8,9 +8,10 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 
 import Root from './root'
 
-const IndexPage = React.lazy(() => import('pages/index'))
-const PokemonIdPage = React.lazy(() => import('pages/pokemon/[id]'))
+import PokemonIdAbilitiesPage from 'pages/pokemon/[id]/abilities'
 
+const IndexPage = React.lazy(() => import('pages/index'))
+const PokemonIdLayout = React.lazy(() => import('components/PokemonId/Layout'))
 
 const router = createBrowserRouter([
     {
@@ -22,8 +23,16 @@ const router = createBrowserRouter([
                 element: <IndexPage />,
             },
             {
-                path: 'pokemon/:id',
-                element: <PokemonIdPage />,
+                element: <PokemonIdLayout />,
+                children: [
+                    {
+                        path: 'pokemon/:id/',
+                    },
+                    {
+                        path: 'pokemon/:id/abilities',
+                        element: <PokemonIdAbilitiesPage />,
+                    },
+                ],
             },
         ],
     },

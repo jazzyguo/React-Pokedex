@@ -1,4 +1,4 @@
-@import 'lib/styles/styles.scss';
+@import "lib/styles/styles.scss";
 
 .container {
     padding: 6rem 0 0;
@@ -26,7 +26,7 @@
             @include breakpoint-min($md) {
                 width: 4rem;
                 height: 4rem;
-            } 
+            }
         }
 
         .sprite {
@@ -81,6 +81,7 @@
             border-radius: 1rem;
             padding: 0.5rem 1rem;
             margin-right: 0.5rem;
+            box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.15);
 
             &:last-child {
                 margin-right: 0;
@@ -93,4 +94,12 @@
             margin: auto 0.45rem auto 0;
         }
     }
+}
+
+.loading {
+    position: absolute;
+    top: calc(100vh / 3);
+    left: 0;
+    right: 0;
+    margin: auto;
 }
