@@ -7,7 +7,7 @@ export const name = 'pokemon'
 export const initialState: PokemonReducerState = {
     count: 0,
     offset: 0,
-    limit: 20,
+    limit: 0,
     data: [],
     selectedPokemon: null,
     status: 'idle',

@@ -32,7 +32,8 @@ export const selectCount = createSelector(
 export const selectHasNext = createSelector(
     selectSelf,
     selectStatusIdle,
-    (state, isInit) => state?.next !== null || isInit
+    selectPokemonData,
+    (state, isInit, data) => state?.next !== null || isInit || !data.length
 )
 
 export const selectOffset = createSelector(

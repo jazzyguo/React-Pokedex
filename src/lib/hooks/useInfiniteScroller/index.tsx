@@ -36,7 +36,7 @@ const useInfiniteScroller = ({
     loadingSelector = () => false,
     hasNextSelector = () => false,
     offsetSelector = () => 0,
-    limit = 20,
+    limit = 40,
 }) => {
     const dispatch = useDispatch()
 
