@@ -6,17 +6,26 @@ import { store } from './store'
 import { Provider } from 'react-redux'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 
+import Root from './root'
+
 const IndexPage = React.lazy(() => import('pages/index'))
 const PokemonIdPage = React.lazy(() => import('pages/pokemon/[id]'))
+
 
 const router = createBrowserRouter([
     {
         path: '/',
-        element: <IndexPage />,
-    },
-    {
-        path: 'pokemon/:id',
-        element: <PokemonIdPage />,
+        element: <Root />,
+        children: [
+            {
+                index: true,
+                element: <IndexPage />,
+            },
+            {
+                path: 'pokemon/:id',
+                element: <PokemonIdPage />,
+            },
+        ],
     },
 ])
 
