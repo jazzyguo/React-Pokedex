@@ -10,6 +10,8 @@ import {
 } from 'features/pokemon'
 
 import { unslug } from 'lib/utils/strings'
+import { getSpriteImageUrl } from 'lib/utils/image'
+
 import useInfiniteScroller from 'lib/hooks/useInfiniteScroller'
 
 import styles from './PokemonList.module.scss'
@@ -28,15 +30,16 @@ const PokemonList = () => {
     return (
         <InfiniteScroller className={styles.pokemonList}>
             {data.map((pokemon) => {
-                const number = pokemon.id || (pokemon.url || '').split('/')[6]
+                const id = pokemon.id || (pokemon.url || '').split('/')[6]
                 return (
                     <div
                         key={pokemon.name}
                         className={styles.pokemonList_item}
-                        onClick={() => navigate(`/pokemon/${number}`)}
+                        onClick={() => navigate(`/pokemon/${id}`)}
                     >
+                        <img src={getSpriteImageUrl(id)} />
                         <span className={styles.pokemonList_item_number}>
-                            #{number}
+                            #{id}
                         </span>
                         <span className={styles.pokemonList_item_name}>
                             {unslug(pokemon.name)}
