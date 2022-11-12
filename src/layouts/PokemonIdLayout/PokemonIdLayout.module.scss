@@ -1,103 +1,16 @@
 @import "lib/styles/styles.scss";
 
 .container {
-    padding: 6rem 0 0;
     position: relative;
     max-width: 1200px;
     margin: auto;
-
-    .banner {
-        display: flex;
-        position: relative;
-
-        .shiny {
-            width: 2rem;
-            height: 2rem;
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            border-radius: 0.5rem;
-            cursor: pointer;
-
-            &:hover {
-                opacity: 0.75;
-            }
-
-            @include breakpoint-min($md) {
-                width: 4rem;
-                height: 4rem;
-            }
-        }
-
-        .sprite {
-            width: 50%;
-            height: 50%;
-            margin: auto;
-        }
-    }
 }
 
 .content {
-    display: grid;
-    grid-template-columns: max-content;
-    column-gap: 2rem;
-    padding: 0 3rem;
+    padding: 1rem 2rem;
 
-    &_title {
-        display: flex;
-        height: max-content;
-        width: max-content;
-        flex-direction: column;
-        grid-column: 1;
-
-        > div {
-            display: flex;
-        }
-
-        img {
-            width: 1.5rem;
-            height: 1.5rem;
-            margin: auto 0.25rem auto 0;
-        }
-
-        h1 {
-            font-size: 3rem;
-            margin: 0;
-        }
-
-        h2 {
-            font-size: 1.5rem;
-            font-weight: 600;
-            margin: 0;
-        }
-    }
-
-    &_types {
-        display: flex;
-        margin-top: 0.5rem;
-        grid-column: 1;
-
-        > div {
-            display: flex;
-            justify-content: space-around;
-            text-align: center;
-            width: fit-content;
-            color: #fff;
-            border-radius: 1rem;
-            padding: 0.5rem 1rem;
-            margin-right: 0.5rem;
-            box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.15);
-
-            &:last-child {
-                margin-right: 0;
-            }
-        }
-
-        img {
-            width: 1.5rem;
-            height: 1.5rem;
-            margin: auto 0.45rem auto 0;
-        }
+    @include breakpoint-min($md) {
+        padding: 2rem 3rem;
     }
 }
 

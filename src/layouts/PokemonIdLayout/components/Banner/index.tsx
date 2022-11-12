@@ -1,9 +1,14 @@
 import React, { useState } from 'react'
 
+import Types from '../Types'
+
 import { getSpriteImageUrl } from 'lib/utils/image'
 import { TYPE_COLORS } from 'lib/constants/pokemonTypes'
 
 import shiny from 'assets/images/shiny.png'
+import pokeball from 'assets/images/pokeball.png'
+
+import { unslug } from 'lib/utils/strings'
 
 import styles from './Banner.module.scss'
 
@@ -39,6 +44,14 @@ const Banner = ({ name = '', id = '', types = [] }: Props) => {
                 alt="shiny"
                 className={styles.shiny}
             />
+            <div className={styles.container_meta}>
+                <div>
+                    <img src={pokeball} alt="pokeball" />
+                    <h2>#{id}</h2>
+                </div>
+                <h1>{unslug(name)}</h1>
+                <Types data={types} />
+            </div>
         </div>
     )
 }

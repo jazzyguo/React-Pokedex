@@ -19,7 +19,14 @@ const FAIRY_TYPE = 'fairy'
 const UNKNOWN_TYPE = 'unknown'
 const SHADOW_TYPE = 'shadow'
 
-export const TYPE_COLORS= {
+export const ATTACK_STAT = 'attack'
+export const DEFENSE_STAT = 'defense'
+export const HP_STAT = 'hp'
+export const SPECIAL_ATTACK_STAT = 'special-attack'
+export const SPECIAL_DEFENSE_STAT = 'special-defense'
+export const SPEED_STAT = 'speed'
+
+export const TYPE_COLORS = {
     [NORMAL_TYPE]: '#A8A878',
     [FIGHTING_TYPE]: '#C03028',
     [FLYING_TYPE]: '#A890F0',
@@ -40,4 +47,13 @@ export const TYPE_COLORS= {
     [FAIRY_TYPE]: '#EE99AC',
     [UNKNOWN_TYPE]: '#68A090',
     [SHADOW_TYPE]: '#705898',
+}
+
+export const STAT_COLORS = {
+    [ATTACK_STAT]: '#F08030',
+    [DEFENSE_STAT]: '#E0C068',
+    [SPECIAL_ATTACK_STAT]: '#6890F0',
+    [HP_STAT]: '#F85888',
+    [SPECIAL_DEFENSE_STAT]: '#78C850',
+    [SPEED_STAT]: '#FA92B2',
 }

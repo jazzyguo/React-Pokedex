@@ -1,3 +1,13 @@
 .container {
-    grid-column: 2;
+}
+
+.stat {
+    &_name {
+        font-size: 1rem;
+        font-weight: 600;
+        margin: 0;
+    }
+
+    &_donut {
+    }
 }
