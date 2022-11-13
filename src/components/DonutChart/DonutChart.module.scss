@@ -1,3 +1,5 @@
+@import "lib/styles/styles.scss";
+
 .container {
     display: flex;
     flex-direction: column;
@@ -31,10 +33,4 @@
     font-weight: 600;
     width: max-content;
     height: max-content;
-}
-
-@keyframes circle-chart-fill {
-    to {
-        stroke-dasharray: 0 100;
-    }
 }

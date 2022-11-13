@@ -1,18 +1,26 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
+import { useParams } from 'react-router-dom'
+
+import { selectPokemonById } from 'features/pokemon'
 
 import { unslug } from 'lib/utils/strings'
 import { TYPE_COLORS } from 'lib/constants/pokemonTypes'
 
 import styles from './Types.module.scss'
 
-type Props = {
-    data: PokemonType[]
-}
+const PokemonTypes = () => {
+    const { id } = useParams()
 
-const PokemonTypes = ({ data = [] }: Props) => {
+    const pokemonData: Pokemon = useSelector((state) =>
+        selectPokemonById(state, id)
+    )
+
+    const { types = [] } = pokemonData
+
     return (
         <div className={styles.container}>
-            {data.map(({ type }) => {
+            {types.map(({ type }) => {
                 let typeImgSrc
 
                 try {

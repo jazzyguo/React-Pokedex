@@ -39,8 +39,8 @@ const pokemonSlice = createSlice({
         builder.addCase(fetchPokemons.pending, (state, { meta }) => {
             state.pokemon.error = undefined
             state.pokemon.status = LOADING_STATUS
-            state.pagination.offset = meta.arg.offset
-            state.pagination.limit = meta.arg.limit
+            state.pagination.offset = meta.arg.offset || state.pagination.offset
+            state.pagination.limit = meta.arg.limit || state.pagination.limit
         })
         builder.addCase(fetchPokemons.fulfilled, (state, { payload }) => {
             state.pokemon.data = [

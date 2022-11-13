@@ -48,6 +48,7 @@ const Evolution = ({ id, details = [], chain, name = '' }: Props) => {
                         (evolution) =>
                             evolution && (
                                 <Evolution
+                                    key={evolution?.species?.name}
                                     details={evolution?.evolution_details || []}
                                     chain={evolution}
                                     name={unslug(evolution?.species?.name)}

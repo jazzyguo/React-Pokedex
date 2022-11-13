@@ -3,7 +3,6 @@ import React, { useState } from 'react'
 import Types from '../Types'
 
 import { getSpriteImageUrl } from 'lib/utils/image'
-import { TYPE_COLORS } from 'lib/constants/pokemonTypes'
 
 import shiny from 'assets/images/shiny.png'
 import pokeball from 'assets/images/pokeball.png'
@@ -14,13 +13,13 @@ import styles from './Banner.module.scss'
 type Props = {
     name?: string
     id: number | undefined
-    types?: PokemonType[]
+    color?: string
 }
 
 /**
  * Main banner image for a pokemon along with its name, id, and types
  */
-const Banner = ({ name = '', id, types = [] }: Props) => {
+const Banner = ({ name = '', id, color = '#fff' }: Props) => {
     const [showShiny, setShowShiny] = useState(false)
 
     const spriteUrl = getSpriteImageUrl(id)
@@ -34,9 +33,7 @@ const Banner = ({ name = '', id, types = [] }: Props) => {
         <div
             className={styles.container}
             style={{
-                backgroundImage: `linear-gradient(${
-                    TYPE_COLORS[types[0]?.type?.name]
-                }, #fff)`,
+                backgroundImage: `linear-gradient(${color}, #fff)`,
             }}
         >
             <img src={imageUrl} alt={name} className={styles.sprite} />
@@ -54,7 +51,7 @@ const Banner = ({ name = '', id, types = [] }: Props) => {
                     <h2>#{id}</h2>
                 </div>
                 <h1>{name}</h1>
-                <Types data={types} />
+                <Types />
             </div>
         </div>
     )

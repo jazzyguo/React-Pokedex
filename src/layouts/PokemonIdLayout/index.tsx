@@ -1,14 +1,16 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useParams, Link, Outlet } from 'react-router-dom'
+import { useParams, Outlet } from 'react-router-dom'
 
 import {
     fetchPokemon,
+    fetchPokemons,
+    selectPokemonData,
     selectPokemonById,
     selectPokemonStatusLoading,
 } from 'features/pokemon'
 
-import BackButton from 'components/BackButton'
+import Navbar from 'components/Navbar'
 import Loading from 'components/Loading'
 
 import Stats from './components/Stats'
@@ -16,10 +18,9 @@ import Banner from './components/Banner'
 import Evolutions from './components/Evolutions'
 
 import { unslug } from 'lib/utils/strings'
+import { TYPE_COLORS } from 'lib/constants/pokemonTypes'
 
 import styles from './PokemonIdLayout.module.scss'
-
-const NavButtons = ({ id }) => {}
 
 const PokemonIdLayout = () => {
     const dispatch = useDispatch()
@@ -28,7 +29,8 @@ const PokemonIdLayout = () => {
 
     const isLoading = useSelector(selectPokemonStatusLoading)
 
-    const pokemonData: Pokemon = useSelector((state) =>
+    const pokemonData: Pokemon[] = useSelector(selectPokemonData)
+    const currPokemonData: Pokemon = useSelector((state) =>
         selectPokemonById(state, pokemonId)
     )
 
@@ -37,16 +39,28 @@ const PokemonIdLayout = () => {
     }, [])
 
     useEffect(() => {
-        if (!pokemonData) {
+        if (!currPokemonData) {
             dispatch(fetchPokemon(pokemonId))
         }
-    }, [pokemonData, pokemonId, dispatch])
+    }, [currPokemonData, pokemonId, dispatch])
 
-    if (!pokemonData) {
+    // lets fetch some data from list endpoint
+    // to get some pagination data thats needed for top nav
+    useEffect(() => {
+        if (!pokemonData.length) {
+            dispatch(
+                fetchPokemons({
+                    limit: 1,
+                })
+            )
+        }
+    }, [pokemonData, dispatch])
+
+    if (!currPokemonData) {
         return null
     }
 
-    const { name: _name, id, types = [], stats = [] } = pokemonData
+    const { name: _name, id, types = [], stats = [] } = currPokemonData
 
     if (!id) {
         throw new Error('Pokemon ID is missing')
@@ -54,21 +68,20 @@ const PokemonIdLayout = () => {
 
     const name = unslug(_name)
 
+    const color = TYPE_COLORS[types[0]?.type?.name]
+
     return (
         <>
-            <BackButton />
+            <Navbar color={color} id={id} />
             <div className={styles.container}>
                 {isLoading ? (
                     <Loading size={100} className={styles.loading} />
                 ) : (
                     <>
-                        <Banner name={name} id={id} types={types} />
+                        <Banner name={name} id={id} color={color} />
                         <div className={styles.content}>
                             <Stats data={stats} />
                             <Evolutions id={id} />
-                            {/* <Link to={`pokemon/${id}/abilities`} replace>
-                            abilities
-                        </Link> */}
                             <Outlet />
                         </div>
                     </>
