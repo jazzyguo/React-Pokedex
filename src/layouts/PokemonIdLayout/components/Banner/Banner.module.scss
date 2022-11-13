@@ -4,7 +4,7 @@
     display: flex;
     position: relative;
     flex-direction: column;
-    padding-bottom: 1rem;
+    padding: 2rem 0 1rem;
 
     @include breakpoint-min($md) {
         padding-bottom: 2rem;
@@ -39,6 +39,8 @@
     height: 50%;
     margin: auto;
     max-width: 600px;
+    animation: 2s;
+    animation-name: pokemonMovement;
 }
 
 .container_meta {

@@ -14,6 +14,27 @@
     }
 }
 
+@keyframes pokemonMovement {
+    0% {
+        transform: rotate(5deg);
+    }
+    10% {
+        transform: rotate(-5deg);
+    }
+    100%,
+    20%,
+    50%,
+    80% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-3rem);
+    }
+    60% {
+        transform: translateY(-1.5rem);
+    }
+}
+
 @keyframes rotation {
     from {
         transform: rotate(0deg);
