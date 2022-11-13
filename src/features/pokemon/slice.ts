@@ -1,18 +1,34 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-import { fetchPokemons, fetchPokemon } from './thunks'
+import { fetchPokemons, fetchPokemon, fetchEvolutions } from './thunks'
+
+import {
+    IDLE_STATUS,
+    LOADING_STATUS,
+    READY_STATUS,
+    ERROR_STATUS,
+} from './constants'
 
 export const name = 'pokemon'
 
 export const initialState: PokemonReducerState = {
-    count: 0,
-    offset: 0,
-    limit: 0,
-    data: [],
-    selectedPokemon: null,
-    status: 'idle',
-    error: undefined,
-    next: null,
+    pagination: {
+        count: 0,
+        offset: 0,
+        limit: 0,
+        next: null,
+    },
+    pokemon: {
+        data: [],
+        selectedPokemon: null,
+        status: IDLE_STATUS,
+        error: undefined,
+    },
+    evolutions: {
+        data: [],
+        status: IDLE_STATUS,
+        error: undefined,
+    },
 }
 
 const pokemonSlice = createSlice({
@@ -21,43 +37,62 @@ const pokemonSlice = createSlice({
     reducers: {},
     extraReducers: (builder) => {
         builder.addCase(fetchPokemons.pending, (state, { meta }) => {
-            state.error = undefined
-            state.status = 'loading'
-            state.offset = meta.arg.offset
-            state.limit = meta.arg.limit
+            state.pokemon.error = undefined
+            state.pokemon.status = LOADING_STATUS
+            state.pagination.offset = meta.arg.offset
+            state.pagination.limit = meta.arg.limit
         })
         builder.addCase(fetchPokemons.fulfilled, (state, { payload }) => {
-            state.data = [...state.data, ...(payload.results || [])]
-            state.count = payload.count || 0
-            state.next = payload.next || null
-            state.offset = state.offset + state.limit
-            state.error = undefined
-            state.status = 'ready'
+            state.pokemon.data = [
+                ...state.pokemon.data,
+                ...(payload.results || []),
+            ]
+            state.pagination.count = payload.count || 0
+            state.pagination.next = payload.next || null
+            state.pagination.offset =
+                state.pagination.offset + state.pagination.limit
+            state.pokemon.error = undefined
+            state.pokemon.status = READY_STATUS
         })
         builder.addCase(fetchPokemons.rejected, (state, { error }) => {
-            state.error = error.message
-            state.status = 'error'
+            state.pokemon.error = error.message
+            state.pokemon.status = ERROR_STATUS
         })
         builder.addCase(fetchPokemon.pending, (state) => {
-            state.error = undefined
-            state.status = 'loading'
-            state.selectedPokemon = null
+            state.pokemon.error = undefined
+            state.pokemon.status = 'loading'
+            state.pokemon.selectedPokemon = null
         })
         builder.addCase(fetchPokemon.fulfilled, (state, { payload }) => {
             // lets update the pokemon data if available
             // otherwise save it to the selectedPokemon key
-            const index = state.data.findIndex((p) => p.name === payload.name)
+            const index = state.pokemon.data.findIndex(
+                (p) => p.name === payload.name
+            )
             if (index !== -1) {
-                state.data[index] = payload
+                state.pokemon.data[index] = payload
             } else {
-                state.selectedPokemon = payload
+                state.pokemon.selectedPokemon = payload
             }
-            state.error = undefined
-            state.status = 'ready'
+            state.pokemon.error = undefined
+            state.pokemon.status = READY_STATUS
         })
         builder.addCase(fetchPokemon.rejected, (state, { error }) => {
-            state.error = error.message
-            state.status = 'error'
+            state.pokemon.error = error.message
+            state.pokemon.status = ERROR_STATUS
+        })
+        builder.addCase(fetchEvolutions.pending, (state) => {
+            state.evolutions.error = undefined
+            state.evolutions.status = 'loading'
+        })
+        builder.addCase(fetchEvolutions.fulfilled, (state, { payload }) => {
+            state.evolutions.data = [...state.evolutions.data, payload]
+            state.evolutions.error = undefined
+            state.evolutions.status = READY_STATUS
+        })
+        builder.addCase(fetchEvolutions.rejected, (state, { error }) => {
+            state.evolutions.error = error.message
+            state.evolutions.status = ERROR_STATUS
         })
     },
 })

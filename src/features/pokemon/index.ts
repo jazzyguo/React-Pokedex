@@ -1,13 +1,15 @@
 export {
     selectPokemonData,
-    selectStatusIdle,
-    selectStatusLoading,
-    selectStatusReady,
-    selectError,
+    selectPokemonStatusIdle,
+    selectPokemonStatusLoading,
+    selectPokemonStatusReady,
+    selectPokemonError,
     selectCount,
     selectHasNext,
     selectOffset,
     selectPokemonById,
+    selectEvolutionById,
+    selectEvolutionStatusLoading,
 } from './selectors'
 
-export { fetchPokemons, fetchPokemon } from './thunks'
+export { fetchPokemons, fetchPokemon, fetchEvolutions } from './thunks'

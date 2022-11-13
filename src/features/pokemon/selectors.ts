@@ -1,55 +1,96 @@
 import { createSelector } from '@reduxjs/toolkit'
+import { IDLE_STATUS, LOADING_STATUS, READY_STATUS } from './constants'
 
 const selectSelf = (state: { pokemon: PokemonReducerState }) => state['pokemon']
 
-export const selectStatusIdle = createSelector(
+export const selectPokemonStatusIdle = createSelector(
     selectSelf,
-    (state) => state.status === 'idle'
+    ({ pokemon }) => pokemon?.status === IDLE_STATUS
 )
 
-export const selectStatusLoading = createSelector(
+export const selectPokemonStatusLoading = createSelector(
     selectSelf,
-    (state) => state?.status === 'loading'
+    ({ pokemon }) => pokemon?.status === LOADING_STATUS
 )
 
-export const selectStatusReady = createSelector(
+export const selectPokemonStatusReady = createSelector(
     selectSelf,
-    (state) => state?.status === 'ready'
+    ({ pokemon }) => pokemon?.status === READY_STATUS
 )
 
-export const selectError = createSelector(selectSelf, (state) => state?.error)
+export const selectPokemonError = createSelector(
+    selectSelf,
+    ({ pokemon }) => pokemon?.error
+)
 
 export const selectPokemonData = createSelector(
     selectSelf,
-    (state) => state?.data || []
+    ({ pokemon }) => pokemon?.data || []
 )
 
 export const selectCount = createSelector(
     selectSelf,
-    (state) => state?.count || 0
+    ({ pagination }) => pagination?.count || 0
 )
 
 export const selectHasNext = createSelector(
     selectSelf,
-    selectStatusIdle,
+    selectPokemonStatusIdle,
     selectPokemonData,
-    (state, isInit, data) => state?.next !== null || isInit || !data.length
+    ({ pagination }, isInit, data) =>
+        pagination?.next !== null || isInit || !data.length
 )
 
 export const selectOffset = createSelector(
     selectSelf,
-    (state) => state?.offset || 0
+    ({ pagination }) => pagination?.offset || 0
 )
 
 export const selectSelectedPokemon = createSelector(
     selectSelf,
-    (state) => state?.selectedPokemon
+    ({ pokemon }) => pokemon?.selectedPokemon
 )
 
+export const selectEvolutionData = createSelector(
+    selectSelf,
+    ({ evolutions }) => evolutions?.data || []
+)
+
+export const selectEvolutionStatusIdle = createSelector(
+    selectSelf,
+    ({ evolutions }) => evolutions?.status === IDLE_STATUS
+)
+
+export const selectEvolutionStatusLoading = createSelector(
+    selectSelf,
+    ({ evolutions }) => evolutions?.status === LOADING_STATUS
+)
+
+export const selectEvolutionStatusReady = createSelector(
+    selectSelf,
+    ({ evolutions }) => evolutions?.status === READY_STATUS
+)
+
+export const selectEvolutionError = createSelector(
+    selectSelf,
+    ({ evolutions }) => evolutions?.error
+)
+
+export const selectEvolutionById = createSelector(
+    selectEvolutionData,
+    (_: any, id: number) => id,
+    (data: Evolution[], id: number) => {
+        return data.find((e) => e.id === id)
+    }
+)
+
+// this selects pokemon from the main data array
+// but if its not found based on the id existing (api fetched),
+// then it will index into the selectedPokemon key
 export const selectPokemonById = createSelector(
     selectPokemonData,
     selectSelectedPokemon,
-    (_: any, id: string) => id,
+    (_: any, id: number) => id,
     (data: Pokemon[], selectedPokemon: Pokemon, id: string) => {
         if (selectedPokemon && selectedPokemon.id === parseInt(id)) {
             return selectedPokemon

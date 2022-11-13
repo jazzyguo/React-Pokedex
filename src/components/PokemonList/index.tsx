@@ -3,13 +3,13 @@ import { useNavigate } from 'react-router-dom'
 
 import {
     fetchPokemons,
-    selectStatusLoading,
+    selectPokemonStatusLoading,
     selectPokemonData,
     selectHasNext,
     selectOffset,
 } from 'features/pokemon'
 
-import { unslug } from 'lib/utils/strings'
+import { unslug, getPokemonIdFromUrl } from 'lib/utils/strings'
 import { getSpriteImageUrl } from 'lib/utils/image'
 
 import useInfiniteScroller from 'lib/hooks/useInfiniteScroller'
@@ -22,7 +22,7 @@ const PokemonList = () => {
     const { InfiniteScroller, data } = useInfiniteScroller({
         fetchAction: fetchPokemons,
         dataSelector: selectPokemonData,
-        loadingSelector: selectStatusLoading,
+        loadingSelector: selectPokemonStatusLoading,
         hasNextSelector: selectHasNext,
         offsetSelector: selectOffset,
     })
@@ -30,7 +30,7 @@ const PokemonList = () => {
     return (
         <InfiniteScroller className={styles.pokemonList}>
             {data.map((pokemon) => {
-                const id = pokemon.id || (pokemon.url || '').split('/')[6]
+                const id = pokemon.id || getPokemonIdFromUrl(pokemon.url)
                 const baseSpriteUrl = getSpriteImageUrl(id)
                 const shinySpriteUrl = getSpriteImageUrl(id, {
                     shiny: true,

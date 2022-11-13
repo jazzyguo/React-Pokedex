@@ -13,6 +13,9 @@ type Props = {
 
 const MAX_STAT_VALUE = 255
 
+/**
+ * Renders a donut chart for each stat
+ */
 const PokemonIdStats = ({ data = [] }: Props) => (
     <div className={styles.container}>
         {data.map(({ base_stat = 0, stat = {} } = {}) => {

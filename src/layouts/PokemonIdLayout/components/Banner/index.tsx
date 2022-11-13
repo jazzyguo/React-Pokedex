@@ -8,17 +8,18 @@ import { TYPE_COLORS } from 'lib/constants/pokemonTypes'
 import shiny from 'assets/images/shiny.png'
 import pokeball from 'assets/images/pokeball.png'
 
-import { unslug } from 'lib/utils/strings'
-
 import styles from './Banner.module.scss'
 
 type Props = {
     name?: string
-    id?: string
+    id: number | undefined
     types?: PokemonType[]
 }
 
-const Banner = ({ name = '', id = '', types = [] }: Props) => {
+/**
+ * Main banner image for a pokemon along with its name, id, and types
+ */
+const Banner = ({ name = '', id, types = [] }: Props) => {
     const [showShiny, setShowShiny] = useState(false)
 
     const spriteUrl = getSpriteImageUrl(id)
@@ -49,7 +50,7 @@ const Banner = ({ name = '', id = '', types = [] }: Props) => {
                     <img src={pokeball} alt="pokeball" />
                     <h2>#{id}</h2>
                 </div>
-                <h1>{unslug(name)}</h1>
+                <h1>{name}</h1>
                 <Types data={types} />
             </div>
         </div>

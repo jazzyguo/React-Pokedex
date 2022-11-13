@@ -2,15 +2,17 @@
 
 .container {
     position: relative;
-    max-width: 1200px;
     margin: auto;
 }
 
 .content {
-    padding: 2rem;
+    @include content();
+    margin: auto;
+    padding-bottom: 4rem;
 
-    @include breakpoint-min($md) {
-        padding: 2rem 3rem;
+    h2 {
+        font-size: 2rem;
+        margin-bottom: 1rem;
     }
 }
 

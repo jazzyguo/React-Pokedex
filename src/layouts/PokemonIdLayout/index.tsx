@@ -5,7 +5,7 @@ import { useParams, Link, Outlet } from 'react-router-dom'
 import {
     fetchPokemon,
     selectPokemonById,
-    selectStatusLoading,
+    selectPokemonStatusLoading,
 } from 'features/pokemon'
 
 import BackButton from 'components/BackButton'
@@ -13,6 +13,9 @@ import Loading from 'components/Loading'
 
 import Stats from './components/Stats'
 import Banner from './components/Banner'
+import Evolutions from './components/Evolutions'
+
+import { unslug } from 'lib/utils/strings'
 
 import styles from './PokemonIdLayout.module.scss'
 
@@ -23,11 +26,15 @@ const PokemonIdLayout = () => {
 
     const { id: pokemonId } = useParams()
 
-    const isLoading = useSelector(selectStatusLoading)
+    const isLoading = useSelector(selectPokemonStatusLoading)
 
     const pokemonData: Pokemon = useSelector((state) =>
         selectPokemonById(state, pokemonId)
     )
+
+    useEffect(() => {
+        window.scrollTo(0, 0)
+    }, [])
 
     useEffect(() => {
         if (!pokemonData) {
@@ -39,26 +46,35 @@ const PokemonIdLayout = () => {
         return null
     }
 
-    const { name, id, types = [], stats = [] } = pokemonData
+    const { name: _name, id, types = [], stats = [] } = pokemonData
+
+    if (!id) {
+        throw new Error('Pokemon ID is missing')
+    }
+
+    const name = unslug(_name)
 
     return (
-        <div className={styles.container}>
+        <>
             <BackButton />
-            {isLoading ? (
-                <Loading size={100} className={styles.loading} />
-            ) : (
-                <>
-                    <Banner name={name} id={id} types={types} />
-                    <div className={styles.content}>
-                        <Stats data={stats} />
-                        {/* <Link to={`pokemon/${id}/abilities`} replace>
+            <div className={styles.container}>
+                {isLoading ? (
+                    <Loading size={100} className={styles.loading} />
+                ) : (
+                    <>
+                        <Banner name={name} id={id} types={types} />
+                        <div className={styles.content}>
+                            <Stats data={stats} />
+                            <Evolutions id={id} />
+                            {/* <Link to={`pokemon/${id}/abilities`} replace>
                             abilities
                         </Link> */}
-                        <Outlet />
-                    </div>
-                </>
-            )}
-        </div>
+                            <Outlet />
+                        </div>
+                    </>
+                )}
+            </div>
+        </>
     )
 }
 
