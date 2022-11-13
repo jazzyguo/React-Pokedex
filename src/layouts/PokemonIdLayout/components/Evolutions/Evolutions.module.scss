@@ -36,10 +36,15 @@ $itemSizeMobile: 64px;
 }
 
 .evolution_meta {
+    cursor: pointer;
     display: flex;
     flex-direction: column;
     justify-content: center;
     height: max-content;
+
+    &:hover {
+        transform: scale(1.1);
+    }
 
     img {
         width: $itemSizeMobile;
@@ -60,6 +65,8 @@ $itemSizeMobile: 64px;
     }
 
     &_trigger {
+        display: flex;
+        justify-content: center;
         font-size: 0.5rem;
         white-space: nowrap;
 

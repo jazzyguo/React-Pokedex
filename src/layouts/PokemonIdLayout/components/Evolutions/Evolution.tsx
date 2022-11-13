@@ -1,4 +1,5 @@
 import React from 'react'
+import { useNavigate, useParams } from 'react-router-dom'
 
 import { getPokemonIdFromUrl, unslug } from 'lib/utils/strings'
 import { getSpriteImageUrl } from 'lib/utils/image'
@@ -12,7 +13,7 @@ import styles from './Evolutions.module.scss'
 type Props = {
     id: number | undefined
     details?: EvolutionDetail[]
-    chain: Evolution
+    chain: Evolution // acts as the children of the current evolution
     name?: string
 }
 
@@ -20,12 +21,20 @@ type Props = {
  * Recursive component to render evolution chain
  */
 const Evolution = ({ id, details = [], chain, name = '' }: Props) => {
+    const { id: currentId } = useParams()
+
+    const navigate = useNavigate()
+
     const { evolves_to: evolvesTo = [] } = chain
+
     const imageUrl = getSpriteImageUrl(id)
 
     return (
         <div className={styles.evolution}>
-            <div className={styles.evolution_meta}>
+            <div
+                className={styles.evolution_meta}
+                onClick={() => currentId !== id && navigate(`/pokemon/${id}`)}
+            >
                 <img src={imageUrl} alt={name} />
                 <span className={styles.evolution_meta_name}>{name}</span>
                 <EvolutionDetails details={details} />

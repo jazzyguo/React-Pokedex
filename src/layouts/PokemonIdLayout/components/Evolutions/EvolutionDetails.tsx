@@ -9,10 +9,8 @@ type Props = {
     details?: EvolutionDetail[]
 }
 
-// maps trigger name to the corresponding key value
-// that should be displayed in the UI
 // depending on the trigger name
-// the value can be different and involve different wording'
+// the value can be different and involve different wordings
 // ie 'use-item' should involve item.name for Use Item (item.name)
 const TRIGGER_MAP = {
     'level-up': [

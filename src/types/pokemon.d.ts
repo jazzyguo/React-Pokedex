@@ -30,6 +30,12 @@ type EvolutionDetail = {
     item: {
         name: string
     }
+    location: {
+        name: string
+    }
+    trigger: {
+        name: string
+    }
 }
 
 type Species = {
