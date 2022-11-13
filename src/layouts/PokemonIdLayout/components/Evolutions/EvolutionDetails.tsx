@@ -16,21 +16,21 @@ const TRIGGER_MAP = {
     'level-up': [
         {
             key: 'min_level',
-            aux: 'At Lv. ',
+            text: 'At Lv. ',
         },
         {
             key: 'location.name',
-            aux: 'At ',
+            text: 'At ',
         },
         {
             key: 'known_move_type.name',
-            aux: 'Level with move of type: ',
+            text: 'Level with move of type: ',
         },
     ],
     'use-item': [
         {
             key: 'item.name',
-            aux: 'Use ',
+            text: 'Use ',
         },
     ],
 }
@@ -48,14 +48,14 @@ const EvolutionDetails = ({ details = [] }: Props) => {
 
                 // check the keys for a found value associated to the trigger name
                 // and return the first found value
-                const { value: triggerKeyValue, aux } =
+                const { value: triggerKeyValue, text } =
                     triggerKeysToCheck.reduce(
-                        (foundValue, { key, aux }) =>
+                        (foundValue, { key, text }) =>
                             foundValue?.value
                                 ? foundValue
                                 : {
                                       value: get(detail, key),
-                                      aux,
+                                      text,
                                   },
                         {}
                     )
@@ -69,7 +69,7 @@ const EvolutionDetails = ({ details = [] }: Props) => {
                         key={trigger.name}
                         className={styles.evolution_meta_trigger}
                     >
-                        {aux}
+                        {text}
                         {unslug(triggerKeyValue)}
                     </div>
                 )

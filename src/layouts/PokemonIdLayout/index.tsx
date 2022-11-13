@@ -12,6 +12,8 @@ import {
 
 import Navbar from 'components/Navbar'
 import Loading from 'components/Loading'
+import BackButton from 'components/BackButton'
+import CarouselNav from 'components/CarouselNav'
 
 import Stats from './components/Stats'
 import Banner from './components/Banner'
@@ -72,7 +74,10 @@ const PokemonIdLayout = () => {
 
     return (
         <>
-            <Navbar color={color} id={id} />
+            <Navbar color={color}>
+                <BackButton />
+                <CarouselNav />
+            </Navbar>
             <div className={styles.container}>
                 {isLoading ? (
                     <Loading size={100} className={styles.loading} />

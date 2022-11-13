@@ -1,28 +1,23 @@
 import React from 'react'
 
-import BackButton from 'components/BackButton'
-import CarouselNav from 'components/CarouselNav'
-
 import styles from './Navbar.module.scss'
 
 type Props = {
     color?: string
+    children?: React.ReactNode
 }
 
 /**
- * Sticky top nav for the pokemon id page layout
- * that will render a back button and a way to go to the next
- * and previous pokemon based on current id
+ * Sticky top nav, children can be passed in to be rendered
  */
-const Navbar = ({ color = '#fff' }: Props) => (
+const Navbar = ({ color = '#fff', children = null }: Props) => (
     <div
         className={styles.container}
         style={{
             background: color,
         }}
     >
-        <BackButton />
-        <CarouselNav />
+        {children}
     </div>
 )
 
