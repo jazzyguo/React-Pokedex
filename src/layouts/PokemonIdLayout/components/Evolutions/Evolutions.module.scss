@@ -4,7 +4,10 @@ $itemSizeDesktop: 96px;
 $itemSizeMobile: 64px;
 
 .container {
+    display: flex;
+    flex-direction: column;
     padding: 1rem 0;
+    align-items: center;
 }
 
 .evolution {

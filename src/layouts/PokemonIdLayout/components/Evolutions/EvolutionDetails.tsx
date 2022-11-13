@@ -16,21 +16,21 @@ const TRIGGER_MAP = {
     'level-up': [
         {
             key: 'min_level',
-            aux: 'at Lv. ',
+            aux: 'At Lv. ',
         },
         {
             key: 'location.name',
-            aux: 'at ',
+            aux: 'At ',
         },
         {
             key: 'known_move_type.name',
-            aux: 'with move of type: ',
+            aux: 'Level with move of type: ',
         },
     ],
     'use-item': [
         {
             key: 'item.name',
-            aux: '- ',
+            aux: 'Use ',
         },
     ],
 }
@@ -69,7 +69,7 @@ const EvolutionDetails = ({ details = [] }: Props) => {
                         key={trigger.name}
                         className={styles.evolution_meta_trigger}
                     >
-                        {unslug(trigger.name)} {aux}
+                        {aux}
                         {unslug(triggerKeyValue)}
                     </div>
                 )
