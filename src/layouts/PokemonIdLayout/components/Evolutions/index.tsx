@@ -37,17 +37,27 @@ const Evolutions = ({ id }: Props) => {
 
     const { chain = {} } = evolutionData || {}
 
+    const canEvolve = !!chain.evolves_to?.length
+
     return (
         <div className={styles.container}>
             <h2>Evolutions</h2>
             {isLoading ? (
                 <Loading />
             ) : (
-                <Evolution
-                    chain={chain}
-                    id={getPokemonIdFromUrl(chain?.species?.url)}
-                    name={unslug(chain?.species?.name)}
-                />
+                <>
+                    {!canEvolve ? (
+                        <div className={styles.no_evolutions}>
+                            This pokemon has no evolution chain
+                        </div>
+                    ) : (
+                        <Evolution
+                            chain={chain}
+                            id={getPokemonIdFromUrl(chain?.species?.url)}
+                            name={unslug(chain?.species?.name)}
+                        />
+                    )}
+                </>
             )}
         </div>
     )

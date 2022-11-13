@@ -18,19 +18,22 @@ const MAX_STAT_VALUE = 255
  */
 const PokemonIdStats = ({ data = [] }: Props) => (
     <div className={styles.container}>
-        {data.map(({ base_stat = 0, stat = {} } = {}) => {
-            const percentage = (base_stat / MAX_STAT_VALUE) * 100
-            const statColor = STAT_COLORS[stat.name]
-            return (
-                <DonutChart
-                    key={stat.name}
-                    percentage={percentage}
-                    label={unslug(stat.name)}
-                    centerText={`${base_stat}/${MAX_STAT_VALUE}`}
-                    color={statColor}
-                />
-            )
-        })}
+        <h2>Base Stats</h2>
+        <div className={styles.grid_container}>
+            {data.map(({ base_stat = 0, stat = {} } = {}) => {
+                const percentage = (base_stat / MAX_STAT_VALUE) * 100
+                const statColor = STAT_COLORS[stat.name]
+                return (
+                    <DonutChart
+                        key={stat.name}
+                        percentage={percentage}
+                        label={unslug(stat.name)}
+                        centerText={`${base_stat}/${MAX_STAT_VALUE}`}
+                        color={statColor}
+                    />
+                )
+            })}
+        </div>
     </div>
 )
 

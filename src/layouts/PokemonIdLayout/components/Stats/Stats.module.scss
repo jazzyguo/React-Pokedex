@@ -1,6 +1,12 @@
 @import "lib/styles/styles.scss";
 
 .container {
+    h2 {
+        margin: 0 0 1.5rem;
+    }
+}
+
+.grid_container {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
     grid-gap: 1rem;

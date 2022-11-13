@@ -56,7 +56,7 @@ const Banner = ({ name = '', id, color = '#fff' }: Props) => {
             <div className={styles.container_meta}>
                 <div>
                     <img src={pokeball} alt="pokeball" />
-                    <h2>#{id}</h2>
+                    <h3>#{id}</h3>
                 </div>
                 <h1>{name}</h1>
                 <Types />
