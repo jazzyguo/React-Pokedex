@@ -40,7 +40,14 @@
     margin: auto;
     max-width: 600px;
     animation: 2s;
-    animation-name: pokemonMovement;
+
+    &--animation-1 {
+        animation-name: pokemonMovement1;
+    }
+
+    &--animation-2 {
+        animation-name: pokemonMovement2;
+    }
 }
 
 .container_meta {

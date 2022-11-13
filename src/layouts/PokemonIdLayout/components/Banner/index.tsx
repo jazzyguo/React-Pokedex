@@ -29,6 +29,9 @@ const Banner = ({ name = '', id, color = '#fff' }: Props) => {
 
     const imageUrl = showShiny ? shinySpriteUrl : spriteUrl
 
+    // get random number for animation
+    const randomNumber = Math.floor(Math.random() * 2) + 1
+
     return (
         <div
             className={styles.container}
@@ -36,14 +39,19 @@ const Banner = ({ name = '', id, color = '#fff' }: Props) => {
                 backgroundImage: `linear-gradient(${color}, #fff)`,
             }}
         >
-            <img src={imageUrl} alt={name} className={styles.sprite} />
+            <img
+                src={imageUrl}
+                alt={name}
+                className={cx(
+                    styles.sprite,
+                    styles[`sprite--animation-${randomNumber}`]
+                )}
+            />
             <img
                 onClick={() => setShowShiny(!showShiny)}
                 src={shiny}
                 alt="shiny"
-                className={cx(styles.shiny, {
-                    [styles['shiny--active']]: showShiny,
-                })}
+                className={styles.shiny}
             />
             <div className={styles.container_meta}>
                 <div>
