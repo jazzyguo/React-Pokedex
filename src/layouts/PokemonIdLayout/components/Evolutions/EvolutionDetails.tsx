@@ -44,7 +44,7 @@ const EvolutionDetails = ({ details = [] }: Props) => {
                 const triggerName = trigger?.name
 
                 // get the keys to chek for in the detail object
-                const triggerKeysToCheck = TRIGGER_MAP[triggerName]
+                const triggerKeysToCheck = TRIGGER_MAP[triggerName] || []
 
                 // check the keys for a found value associated to the trigger name
                 // and return the first found value
@@ -57,7 +57,7 @@ const EvolutionDetails = ({ details = [] }: Props) => {
                                       value: get(detail, key),
                                       aux,
                                   },
-                        null
+                        {}
                     )
 
                 if (!triggerKeyValue) {

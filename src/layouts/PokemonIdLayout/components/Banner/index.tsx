@@ -8,6 +8,7 @@ import { TYPE_COLORS } from 'lib/constants/pokemonTypes'
 import shiny from 'assets/images/shiny.png'
 import pokeball from 'assets/images/pokeball.png'
 
+import cx from 'classnames'
 import styles from './Banner.module.scss'
 
 type Props = {
@@ -43,7 +44,9 @@ const Banner = ({ name = '', id, types = [] }: Props) => {
                 onClick={() => setShowShiny(!showShiny)}
                 src={shiny}
                 alt="shiny"
-                className={styles.shiny}
+                className={cx(styles.shiny, {
+                    [styles['shiny--active']]: showShiny,
+                })}
             />
             <div className={styles.container_meta}>
                 <div>
