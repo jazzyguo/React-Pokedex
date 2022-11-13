@@ -51,9 +51,9 @@ const PokemonIdLayout = () => {
                     <Banner name={name} id={id} types={types} />
                     <div className={styles.content}>
                         <Stats data={stats} />
-                        <Link to={`pokemon/${id}/abilities`} replace>
+                        {/* <Link to={`pokemon/${id}/abilities`} replace>
                             abilities
-                        </Link>
+                        </Link> */}
                         <Outlet />
                     </div>
                 </>

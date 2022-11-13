@@ -13,9 +13,9 @@ import { unslug } from 'lib/utils/strings'
 import styles from './Banner.module.scss'
 
 type Props = {
-    name: string
-    id: string
-    types: PokemonType[]
+    name?: string
+    id?: string
+    types?: PokemonType[]
 }
 
 const Banner = ({ name = '', id = '', types = [] }: Props) => {

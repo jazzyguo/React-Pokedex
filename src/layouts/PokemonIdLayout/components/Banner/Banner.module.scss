@@ -4,6 +4,7 @@
     display: flex;
     position: relative;
     flex-direction: column;
+    box-shadow: 0px 28px 27px -15px rgba(0,0,0,0.1);
 
     .shiny {
         width: 2rem;
@@ -34,7 +35,7 @@
         display: flex;
         height: max-content;
         width: max-content;
-        padding: 0 2rem;
+        padding: 0 2rem 2rem;
         column-gap: 1rem;
         flex-direction: column;
 
@@ -76,8 +77,9 @@
 
         @include breakpoint-min($md) {
             position: absolute;
-            bottom: 0;
-            left: 1rem;
+            bottom: 2rem;
+            left: 2rem;
+            padding: 0;
         }
     }
 }
