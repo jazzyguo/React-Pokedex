@@ -55,22 +55,40 @@ type Evolution = {
     }
 }
 
+type Generations = {
+    [key: string]: Generation
+}
+
+type Generation = {
+    name: string
+    main_region: {
+        name: string
+    }
+    pokemon_species: Species[]
+}
+
+type EvolutionsReducerState = {
+    data: Evolution[]
+    status: 'idle' | 'loading' | 'ready' | 'error'
+    error: string | undefined
+}
+
+type GenerationsReducerState = {
+    data: Generations
+    status: 'idle' | 'loading' | 'ready' | 'error'
+    error: string | undefined
+}
+
 type PokemonReducerState = {
     pagination: {
         count: number
         offset: number
         limit: number
         next: string | null
+        filter: string
     }
-    pokemon: {
-        data: Pokemon[]
-        selectedPokemon: Pokemon | null
-        status: 'idle' | 'loading' | 'ready' | 'error'
-        error: string | undefined
-    }
-    evolutions: {
-        data: Evolution[]
-        status: 'idle' | 'loading' | 'ready' | 'error'
-        error: string | undefined
-    }
+    data: Pokemon[]
+    selectedPokemon: Pokemon | null
+    status: 'idle' | 'loading' | 'ready' | 'error'
+    error: string | undefined
 }

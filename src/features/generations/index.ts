@@ -8,10 +8,12 @@ export {
     selectHasNext,
     selectOffset,
     selectPokemonById,
+    selectEvolutionById,
+    selectEvolutionStatusLoading,
     selectFilteredPokemon,
 } from './selectors'
 
 export {
-    fetchPokemons,
-    fetchPokemon,
+    fetchGenerations,
+    fetchGeneration,
 } from './thunks'

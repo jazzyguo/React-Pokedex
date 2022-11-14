@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 
-import { POKEMON_SPECIES_URL } from '../constants'
+import { POKEMON_SPECIES_URL } from 'lib/constants/api'
 
 const fetchEvolutions = createAsyncThunk<
     Evolution,

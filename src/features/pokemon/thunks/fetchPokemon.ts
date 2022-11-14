@@ -1,24 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 
-import { POKEMON_LIST_URL } from '../constants'
-
-export const fetchPokemonRequest = async (id: string | number | null) => {
-    if (!id) {
-        throw new Error('Invalid id')
-    }
-
-    const response = await fetch(
-        `${POKEMON_LIST_URL}/${id.toString().toLocaleLowerCase()}`
-    )
-
-    if (response.status === 200) {
-        const data = await response.json()
-
-        return data
-    } else {
-        throw new Error('Error fetching pokemon')
-    }
-}
+import { POKEMON_LIST_URL } from 'lib/constants/api'
 
 const fetchPokemon = createAsyncThunk<
     Pokemon,
@@ -28,7 +10,21 @@ const fetchPokemon = createAsyncThunk<
     }
 >('pokemon/fetchPokemon', async (id, { rejectWithValue }) => {
     try {
-        return await fetchPokemonRequest(id)
+        if (!id) {
+            throw new Error('Invalid id')
+        }
+
+        const response = await fetch(
+            `${POKEMON_LIST_URL}/${id.toString().toLocaleLowerCase()}`
+        )
+
+        if (response.status === 200) {
+            const data = await response.json()
+
+            return data
+        } else {
+            throw new Error('Error fetching pokemon')
+        }
     } catch (error) {
         console.log(error)
         return rejectWithValue(error)

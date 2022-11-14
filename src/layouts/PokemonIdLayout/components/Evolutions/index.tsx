@@ -8,7 +8,7 @@ import {
     selectEvolutionById,
     fetchEvolutions,
     selectEvolutionStatusLoading,
-} from 'features/pokemon'
+} from 'features/evolutions'
 
 import { getPokemonIdFromUrl, unslug } from 'lib/utils/strings'
 
