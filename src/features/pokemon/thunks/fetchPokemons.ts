@@ -8,16 +8,21 @@ const fetchPokemons = createAsyncThunk<
         next: string | null
         results: Pokemon[]
     },
-    { offset?: number; limit?: number },
+    { offset?: number | null; limit?: number },
     {
         rejectValue: Error
     }
 >(
     'pokemon/fetchPokemons',
-    async ({ offset = 0, limit = 20 } = {}, { rejectWithValue }) => {
+    async ({ offset, limit = 20 } = {}, { getState, rejectWithValue }) => {
         try {
+            const state: any = getState()
+
+            // pull offset from state if not provided
+            const offsetToUse = offset || state?.pokemon?.pagination?.offset
+
             const response = await fetch(
-                `${POKEMON_LIST_URL}?offset=${offset}&limit=${limit}`
+                `${POKEMON_LIST_URL}?offset=${offsetToUse}&limit=${limit}`
             )
 
             if (response.status === 200) {

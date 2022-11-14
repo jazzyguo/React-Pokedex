@@ -16,5 +16,4 @@ export {
     fetchPokemons,
     fetchPokemon,
     fetchEvolutions,
-    searchPokemon,
 } from './thunks'

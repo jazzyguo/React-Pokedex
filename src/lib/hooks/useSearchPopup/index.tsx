@@ -1,6 +1,4 @@
-import React, { useState, useEffect } from 'react'
-
-import { searchPokemon } from 'features/pokemon'
+import React, { useState } from 'react'
 
 import SearchTrigger from './SearchTrigger'
 import SearchPopup from './SearchPopup'

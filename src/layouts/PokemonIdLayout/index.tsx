@@ -51,7 +51,8 @@ const PokemonIdLayout = () => {
     }, [currPokemonData, pokemonId, dispatch])
 
     // lets fetch some data from list endpoint
-    // to get some pagination data thats needed for top nav
+    // to get some pagination data (count) thats needed for top nav
+    // to get prev/next pokemon
     useEffect(() => {
         if (!pokemonData.length) {
             dispatch(

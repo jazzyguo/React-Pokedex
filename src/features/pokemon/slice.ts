@@ -1,11 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-import {
-    fetchPokemons,
-    fetchPokemon,
-    fetchEvolutions,
-    searchPokemon,
-} from './thunks'
+import { fetchPokemons, fetchPokemon, fetchEvolutions } from './thunks'
 
 import {
     IDLE_STATUS,
@@ -30,11 +25,6 @@ export const initialState: PokemonReducerState = {
         error: undefined,
     },
     evolutions: {
-        data: [],
-        status: IDLE_STATUS,
-        error: undefined,
-    },
-    search: {
         data: [],
         status: IDLE_STATUS,
         error: undefined,
@@ -90,20 +80,6 @@ const pokemonSlice = createSlice({
         builder.addCase(fetchPokemon.rejected, (state, { error }) => {
             state.pokemon.error = error.message
             state.pokemon.status = ERROR_STATUS
-        })
-        builder.addCase(searchPokemon.pending, (state) => {
-            state.search.error = undefined
-            state.search.status = LOADING_STATUS
-            state.search.data = []
-        })
-        builder.addCase(searchPokemon.fulfilled, (state, { payload }) => {
-            state.search.data = [payload]
-            state.search.error = undefined
-            state.search.status = READY_STATUS
-        })
-        builder.addCase(searchPokemon.rejected, (state, { error }) => {
-            state.search.error = error.message
-            state.search.status = ERROR_STATUS
         })
         builder.addCase(fetchEvolutions.pending, (state) => {
             state.evolutions.error = undefined
