@@ -1,7 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 
-import { POKEMON_LIST_URL } from '../constants'
-
 import { fetchPokemonRequest } from './fetchPokemon'
 
 const searchPokemon = createAsyncThunk<

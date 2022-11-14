@@ -19,6 +19,8 @@ import Stats from './components/Stats'
 import Banner from './components/Banner'
 import Evolutions from './components/Evolutions'
 
+import useSearchPopup from 'lib/hooks/useSearchPopup'
+
 import { unslug } from 'lib/utils/strings'
 import { TYPE_COLORS } from 'lib/constants/pokemonTypes'
 
@@ -28,6 +30,8 @@ const PokemonIdLayout = () => {
     const dispatch = useDispatch()
 
     const { id: pokemonId } = useParams()
+
+    const { SearchPopup, SearchTrigger } = useSearchPopup()
 
     const isLoading = useSelector(selectPokemonStatusLoading)
 
@@ -73,24 +77,28 @@ const PokemonIdLayout = () => {
     const color = TYPE_COLORS[types[0]?.type?.name]
 
     return (
-        <div className={styles.container}>
-            <Navbar color={color}>
-                <BackButton />
-                <CarouselNav />
-            </Navbar>
-            {isLoading ? (
-                <Loading size={100} className={styles.loading} />
-            ) : (
-                <>
-                    <Banner name={name} id={id} color={color} />
-                    <div className={styles.content}>
-                        <Stats data={stats} />
-                        <Evolutions id={id} />
-                        <Outlet />
-                    </div>
-                </>
-            )}
-        </div>
+        <>
+            <SearchPopup />
+            <div className={styles.container}>
+                <Navbar color={color}>
+                    <BackButton />
+                    <CarouselNav />
+                    <SearchTrigger className={styles.search} />
+                </Navbar>
+                {isLoading ? (
+                    <Loading size={100} className={styles.loading} />
+                ) : (
+                    <>
+                        <Banner name={name} id={id} color={color} />
+                        <div className={styles.content}>
+                            <Stats data={stats} />
+                            <Evolutions id={id} />
+                            <Outlet />
+                        </div>
+                    </>
+                )}
+            </div>
+        </>
     )
 }
 
