@@ -7,7 +7,6 @@ import Navbar from 'components/Navbar'
 import FilterDropdown from './components/FilterDropdown'
 import Loading from 'components/Loading'
 
-import { selectPokemonStatusLoading } from 'features/pokemon'
 import { selectGenerationsStatusLoading } from 'features/generations'
 
 import useSearchPopup from 'lib/hooks/useSearchPopup'
@@ -19,10 +18,7 @@ import styles from './PokemonListLayout.module.scss'
 const PokemonListLayout = () => {
     const { SearchPopup, SearchTrigger } = useSearchPopup()
 
-    const isPokemonsLoading = useSelector(selectPokemonStatusLoading)
-    const isGenerationsLoading = useSelector(selectGenerationsStatusLoading)
-
-    const isLoading = isPokemonsLoading || isGenerationsLoading
+    const isLoading = useSelector(selectGenerationsStatusLoading)
 
     return (
         <div className={styles.layout}>
