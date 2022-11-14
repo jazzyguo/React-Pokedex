@@ -25,15 +25,19 @@ const PokemonListLayout = () => {
     const isLoading = isPokemonsLoading || isGenerationsLoading
 
     return (
-        <>
+        <div className={styles.layout}>
             <Navbar color="#ccc" className={styles.nav}>
                 <img src={logo} className={styles.logo} alt="Pokemon Logo" />
                 <FilterDropdown />
                 <SearchTrigger />
             </Navbar>
             <SearchPopup />
-            {isLoading ? <Loading className={styles.loading} /> : <PokemonList />}
-        </>
+            {isLoading ? (
+                <Loading className={styles.loading} />
+            ) : (
+                <PokemonList />
+            )}
+        </div>
     )
 }
 

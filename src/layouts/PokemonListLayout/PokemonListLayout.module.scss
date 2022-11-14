@@ -1,5 +1,14 @@
 @import "lib/styles/styles.scss";
 
+.layout {
+    padding-bottom: 6rem;
+
+    @include breakpoint-min($md) {
+        padding-top: 4rem;
+        padding-bottom: 4rem;
+    }
+}
+
 .logo {
     height: 2.5rem;
     width: max-content;

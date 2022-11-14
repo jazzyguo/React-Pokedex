@@ -1,6 +1,6 @@
 import { createSelector } from '@reduxjs/toolkit'
 import { IDLE_STATUS, LOADING_STATUS, READY_STATUS } from 'lib/constants/api'
-import { unslug } from 'lib/utils/strings'
+import { unslug, getPokemonIdFromUrl } from 'lib/utils/strings'
 import { selectGenerationsData } from 'features/generations'
 
 const selectSelf = (state: { pokemon: PokemonReducerState }) => state['pokemon']
@@ -121,6 +121,11 @@ export const selectPokemonListData = createSelector(
 
         if (!generation) return []
 
-        return generation.pokemon_species
+        // sort pokemon by id
+        const generationPokemon = [...generation.pokemon_species].sort(
+            (a, b) => getPokemonIdFromUrl(a.url) - getPokemonIdFromUrl(b.url)
+        )
+
+        return generationPokemon
     }
 )
