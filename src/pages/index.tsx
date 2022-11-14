@@ -1,10 +1,10 @@
 import React from 'react'
 
-import PokemonList from 'components/PokemonList'
+import PokemonListLayout from 'layouts/PokemonListLayout'
 
 const IndexPage = () => (
     <div>
-        <PokemonList />
+        <PokemonListLayout />
     </div>
 )
 
