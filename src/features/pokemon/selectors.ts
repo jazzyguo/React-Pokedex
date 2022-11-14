@@ -87,11 +87,15 @@ export const selectEvolutionById = createSelector(
 // this selects pokemon from the main data array
 // but if its not found based on the id existing (api fetched),
 // then it will index into the selectedPokemon key
+// finds pokemon by matching id which can be
+// a number string or a pokemon's name
 export const selectPokemonById = createSelector(
     selectPokemonData,
     selectSelectedPokemon,
-    (_: any, id: number) => id,
-    (data: Pokemon[], selectedPokemon: Pokemon, id: string) => {
+    (_: any, id: number | string | null) => id,
+    (data: Pokemon[], selectedPokemon: Pokemon, id: string | number | null) => {
+        if (!id) return null
+        
         if (
             selectedPokemon &&
             (selectedPokemon.id === parseInt(id) ||

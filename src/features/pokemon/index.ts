@@ -12,4 +12,9 @@ export {
     selectEvolutionStatusLoading,
 } from './selectors'
 
-export { fetchPokemons, fetchPokemon, fetchEvolutions } from './thunks'
+export {
+    fetchPokemons,
+    fetchPokemon,
+    fetchEvolutions,
+    searchPokemon,
+} from './thunks'
