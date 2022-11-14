@@ -1,5 +1,6 @@
 import { createSelector } from '@reduxjs/toolkit'
 import { IDLE_STATUS, LOADING_STATUS, READY_STATUS } from './constants'
+import { unslug } from 'lib/utils/strings'
 
 const selectSelf = (state: { pokemon: PokemonReducerState }) => state['pokemon']
 
@@ -92,8 +93,8 @@ export const selectEvolutionById = createSelector(
 export const selectPokemonById = createSelector(
     selectPokemonData,
     selectSelectedPokemon,
-    (_: any, id: number | string | null) => id,
-    (data: Pokemon[], selectedPokemon: Pokemon, id: string | number | null) => {
+    (_: any, id: string | null) => id,
+    (data: Pokemon[], selectedPokemon: Pokemon, id: string | null) => {
         if (!id) return null
 
         if (
@@ -118,10 +119,17 @@ export const selectFilteredPokemon = createSelector(
     selectPokemonData,
     (_: any, filter: string) => filter,
     (data: Pokemon[], filter: string) => {
-        return data.filter(
-            (pokemon: Pokemon) =>
-                pokemon.name.toLowerCase().includes(filter.toLowerCase()) &&
-                pokemon.name[0] === filter[0]
-        )
+        if (!filter) return []
+
+        const toSearch = filter.toLocaleLowerCase()
+
+        return data.filter((pokemon: Pokemon) => {
+            const pokemonName = unslug(pokemon?.name || '').toLocaleLowerCase()
+            return (
+                pokemonName &&
+                pokemonName.includes(toSearch) &&
+                pokemonName[0] === toSearch[0]
+            )
+        })
     }
 )
