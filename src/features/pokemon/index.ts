@@ -11,8 +11,9 @@ export {
     selectFilteredPokemon,
     selectFilter,
     selectPokemonListData,
+    selectPage,
 } from './selectors'
 
 export { fetchPokemons, fetchPokemon } from './thunks'
 
-export { setFilter } from './slice'
+export { setFilter, setPage } from './slice'

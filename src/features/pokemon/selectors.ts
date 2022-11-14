@@ -73,8 +73,10 @@ export const selectPokemonById = createSelector(
         let foundPokemon
 
         const isMatch = (pokemon: Pokemon) =>
-            pokemon.id === parseInt(id) ||
-            pokemon.name === id.toLocaleLowerCase()
+            // only if id is on the pokemon object, then we know it was fetched from the api
+            pokemon.id &&
+            (pokemon.id === parseInt(id) ||
+                pokemon.name === id.toLocaleLowerCase())
 
         if (!!selectedPokemons.length) {
             foundPokemon = selectedPokemons.find(isMatch)
@@ -130,4 +132,9 @@ export const selectPokemonListData = createSelector(
 
         return generationPokemon
     }
+)
+
+export const selectPage = createSelector(
+    selectSelf, 
+    ({ pagination }) => pagination?.page || 1
 )

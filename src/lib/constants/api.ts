@@ -8,3 +8,6 @@ export const IDLE_STATUS = 'idle'
 export const LOADING_STATUS = 'loading'
 export const READY_STATUS = 'ready'
 export const ERROR_STATUS = 'error'
+
+// number to fetch
+export const DEFAULT_LIMIT = 100

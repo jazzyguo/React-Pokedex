@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import InfiniteScroller from 'components/InfiniteScroller'
 
+import { DEFAULT_LIMIT } from 'lib/constants/api'
+
 /**
  *
  * @param fetchAction action creator to fetch data
@@ -17,7 +19,7 @@ const useInfiniteScroller = ({
     loadingSelector = () => false,
     hasNextSelector = () => false,
     offsetSelector = () => 0,
-    limit = 100,
+    limit = DEFAULT_LIMIT,
     shouldFetch = true,
 }) => {
     const dispatch = useDispatch()

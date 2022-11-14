@@ -87,6 +87,7 @@ type PokemonReducerState = {
         limit: number
         next: string | null
         filter: string
+        page: number
     }
     data: Pokemon[]
     selectedPokemons: Pokemon[]
