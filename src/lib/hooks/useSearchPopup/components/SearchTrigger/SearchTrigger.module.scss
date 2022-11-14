@@ -1,6 +1,16 @@
+@import "lib/styles/styles.scss";
+
 .searchTrigger {
     height: 64px;
     width: 64px;
+    position: absolute;
+    right: 1rem;
+    cursor: pointer;
+    animation-duration: 2s;
+
+    &:hover {
+        animation-name: bounce;
+    }
 
     img {
         position: absolute;

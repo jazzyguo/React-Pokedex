@@ -1,13 +1,8 @@
 
 @import "lib/styles/styles.scss";
 
-.search {
-    position: absolute;
-    right: 1rem;
-    cursor: pointer;
-    animation-duration: 2s;
-
-    &:hover {
-        animation-name: bounce;
-    }
+.logo {
+    height: 2.5rem;
+    width: max-content;
+    margin: auto 0;
 }

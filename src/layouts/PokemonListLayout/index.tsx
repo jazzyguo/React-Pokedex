@@ -5,6 +5,8 @@ import Navbar from 'components/Navbar'
 
 import useSearchPopup from 'lib/hooks/useSearchPopup'
 
+import logo from 'assets/images/logo.png'
+
 import styles from './PokemonListLayout.module.scss'
 
 const PokemonListLayout = () => {
@@ -13,7 +15,8 @@ const PokemonListLayout = () => {
     return (
         <>
             <Navbar color="#ccc">
-                <SearchTrigger className={styles.search} />
+                <img src={logo} className={styles.logo} alt="Pokemon Logo" />
+                <SearchTrigger />
             </Navbar>
             <SearchPopup />
             <PokemonList />

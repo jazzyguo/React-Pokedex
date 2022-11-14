@@ -50,14 +50,3 @@
     right: 0;
     margin: auto;
 }
-
-.search {
-    position: absolute;
-    right: 1rem;
-    cursor: pointer;
-    animation-duration: 2s;
-
-    &:hover {
-        animation-name: bounce;
-    }
-}

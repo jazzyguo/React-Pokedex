@@ -73,7 +73,7 @@ const SearchPopup = ({ isOpen = false, setIsOpen = () => {} }: Props) => {
 
     return (
         <Modal isOpen={isOpen} setIsOpen={setIsOpen}>
-            <div className={styles.container}>
+            <div>
                 <div className={styles.inputContainer}>
                     <SearchIcon />
                     <input

@@ -83,7 +83,7 @@ const PokemonIdLayout = () => {
             <Navbar color={color}>
                 <BackButton />
                 <CarouselNav />
-                <SearchTrigger className={styles.search} />
+                <SearchTrigger />
             </Navbar>
             {isLoading && !currPokemonData ? (
                 <Loading size={100} className={styles.loading} />
