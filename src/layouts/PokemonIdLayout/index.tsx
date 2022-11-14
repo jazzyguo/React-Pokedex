@@ -77,28 +77,26 @@ const PokemonIdLayout = () => {
     const color = TYPE_COLORS[types[0]?.type?.name]
 
     return (
-        <>
+        <div className={styles.layout}>
             <SearchPopup />
-            <div className={styles.container}>
-                <Navbar color={color}>
-                    <BackButton />
-                    <CarouselNav />
-                    <SearchTrigger className={styles.search} />
-                </Navbar>
-                {isLoading ? (
-                    <Loading size={100} className={styles.loading} />
-                ) : (
-                    <>
-                        <Banner name={name} id={id} color={color} />
-                        <div className={styles.content}>
-                            <Stats data={stats} />
-                            <Evolutions id={id} />
-                            <Outlet />
-                        </div>
-                    </>
-                )}
-            </div>
-        </>
+            <Navbar color={color}>
+                <BackButton />
+                <CarouselNav />
+                <SearchTrigger className={styles.search} />
+            </Navbar>
+            {isLoading ? (
+                <Loading size={100} className={styles.loading} />
+            ) : (
+                <>
+                    <Banner name={name} id={id} color={color} />
+                    <div className={styles.content}>
+                        <Stats data={stats} />
+                        <Evolutions id={id} />
+                        <Outlet />
+                    </div>
+                </>
+            )}
+        </div>
     )
 }
 

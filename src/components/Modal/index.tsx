@@ -1,5 +1,7 @@
 import React, { useRef, useEffect, useCallback } from 'react'
 
+import CloseIcon from 'assets/svg/CloseIcon'
+
 import styles from './Modal.module.scss'
 
 type Props = {
@@ -40,6 +42,10 @@ const Modal = ({
         [setIsOpen]
     )
 
+    const onCloseButtonClick = () => {
+        setIsOpen(false)
+    }
+
     // attach listeners for outside click and keyboard escape press
     useEffect(() => {
         document.addEventListener('keydown', handleEscape)
@@ -58,6 +64,10 @@ const Modal = ({
     return (
         <div className={styles.modalContainer}>
             <div className={styles.modalContainer_content} ref={contentRef}>
+                <CloseIcon
+                    className={styles.close}
+                    onClick={onCloseButtonClick}
+                />
                 {children}
             </div>
         </div>

@@ -3,4 +3,10 @@ the new pokemon game comes out next week and its been a while so i needed a refr
 
 created using create-react-app, react-router v6, reduxjs/toolkit, and pokeapi
 
+Lists pokemon as well as being able to search on specific pokemon names
+
+Detailed pokemon page view with pokemon information
+
+Contains search, pagination, request caching, lazy loading, error handling, and more
+
 Live Url: https://react-pokedex-2d183.web.app/
