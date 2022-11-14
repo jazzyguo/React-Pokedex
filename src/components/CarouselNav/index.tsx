@@ -2,7 +2,7 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import { useParams, useNavigate } from 'react-router-dom'
 
-import { selectCount } from 'features/pokemon'
+import { selectCount, selectPokemonById } from 'features/pokemon'
 import { getSpriteImageUrl } from 'lib/utils/image'
 
 import cx from 'classnames'
@@ -14,8 +14,18 @@ import styles from './CarouselNav.module.scss'
  * while rendering sprites
  */
 const CarouselNav = () => {
-    const { id } = useParams()
+    const { id: pokemonId } = useParams()
     const navigate = useNavigate()
+
+    const currPokemonData: Pokemon = useSelector((state) =>
+        selectPokemonById(state, pokemonId)
+    )
+
+    // check that id is a number, if not, it means we are using
+    // the pokemon name, so we need to convert it to an id
+    const id = isNaN(Number(pokemonId))
+        ? currPokemonData?.id
+        : Number(pokemonId)
 
     // make sure we can go prev or next based on count
     const count: number = useSelector(selectCount)

@@ -35,7 +35,11 @@
 .content {
     @include content();
     margin: auto;
-    padding-bottom: 4rem;
+    padding-bottom: 6rem; // account for navbar on bottom for mobile
+
+    @include breakpoint-min($md) {
+        padding-bottom: 4rem;
+    }
 }
 
 .loading {
