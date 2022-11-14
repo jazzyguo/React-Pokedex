@@ -20,9 +20,10 @@ type Props = {
 const SearchResults = ({ data = [], setIsOpen = () => {} }: Props) => (
     <div className={styles.container}>
         {!!data.length ? (
-            data.map(({ name, url }) => {
-                const id = getPokemonIdFromUrl(url)
+            data.map(({ id: _id, name, url }) => {
+                const id = _id || getPokemonIdFromUrl(url)
                 const spriteUrl = getSpriteImageUrl(id)
+                if (!id) return null
                 return (
                     <Link
                         to={`/pokemon/${id}`}
