@@ -8,7 +8,7 @@ type Props = {
 }
 
 /**
- * Sticky top nav, children can be passed in to be rendered
+ * Sticky nav, children can be passed in to be rendered
  */
 const Navbar = ({ color = '#fff', children = null }: Props) => (
     <div

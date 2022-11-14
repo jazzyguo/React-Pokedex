@@ -52,8 +52,8 @@ export const TYPE_COLORS = {
 export const STAT_COLORS = {
     [ATTACK_STAT]: '#F08030',
     [DEFENSE_STAT]: '#E0C068',
-    [SPECIAL_ATTACK_STAT]: '#6890F0',
-    [HP_STAT]: '#F85888',
-    [SPECIAL_DEFENSE_STAT]: '#78C850',
+    [SPECIAL_DEFENSE_STAT]: '#6890F0',
+    [SPECIAL_ATTACK_STAT]: '#F85888',
+    [HP_STAT]: 'red',
     [SPEED_STAT]: '#FA92B2',
 }

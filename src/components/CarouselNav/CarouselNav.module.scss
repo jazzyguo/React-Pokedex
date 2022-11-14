@@ -1,8 +1,7 @@
 @import "lib/styles/styles.scss";
 
 .carouselNav {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    display: flex;
     align-items: center;
     position: absolute;
     left: 0;
@@ -11,10 +10,6 @@
     top: 0;
     bottom: 0;
     width: max-content;
-
-    @include breakpoint-min($md) {
-        grid-gap: 2rem;
-    }
 }
 
 .carouselNav_item {
@@ -23,6 +18,14 @@
     align-items: center;
     animation-duration: 1s;
     height: 100%;
+
+    @include breakpoint-min($md) {
+        margin-right: 2rem;
+
+        &:last-child {
+            margin-right: 0;
+        }
+    }
 
     img {
         width: 3rem;
@@ -34,10 +37,8 @@
 
     &--active {
         cursor: default;
-        opacity: .75;
+        opacity: 0.75;
         background-color: rgba(0, 0, 0, 0.25);
         animation: none;
     }
 }
-
-
