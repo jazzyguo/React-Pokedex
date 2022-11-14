@@ -14,7 +14,9 @@ const fetchPokemons = createAsyncThunk<
             throw new Error('Invalid id')
         }
 
-        const response = await fetch(`${POKEMON_LIST_URL}/${id}`)
+        const response = await fetch(
+            `${POKEMON_LIST_URL}/${id.toString().toLocaleLowerCase()}`
+        )
 
         if (response.status === 200) {
             const data = await response.json()

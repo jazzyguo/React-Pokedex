@@ -94,14 +94,16 @@ export const selectPokemonById = createSelector(
     (data: Pokemon[], selectedPokemon: Pokemon, id: string) => {
         if (
             selectedPokemon &&
-            (selectedPokemon.id === parseInt(id) || selectedPokemon.name === id)
+            (selectedPokemon.id === parseInt(id) ||
+                selectedPokemon.name === id.toLocaleLowerCase())
         ) {
             return selectedPokemon
         }
 
         return data.find(
             (pokemon: Pokemon) =>
-                pokemon.id === parseInt(id) || pokemon.name === id
+                pokemon.id === parseInt(id) ||
+                pokemon.name === id.toLocaleLowerCase()
         )
     }
 )
