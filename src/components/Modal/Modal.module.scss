@@ -3,6 +3,9 @@
 $width: 100vw;
 $height: 100vh;
 
+$max-width: 600px;
+$max-height: 600px;
+
 .modalContainer {
     position: fixed;
     top: 0;
@@ -14,29 +17,27 @@ $height: 100vh;
 
     &_content {
         position: absolute;
-        top: 0;
-        bottom: 0;
+        top: 2rem;
         left: 0;
         right: 0;
         margin: auto;
         width: 100%;
         height: max-content;
-        max-width: 600px;
-        max-height: 400px;
+        max-width: $max-width;
+        max-height: $max-height;
         background-color: #fff;
-        border-radius: 0.5rem;
         padding: 1rem;
         box-sizing: border-box;
 
-        @include breakpoint-min($md) {
-            padding: 2rem;
+        @include breakpoint-min(calc($max-width + 1px)) {
+            border-radius: 0.5rem;
         }
     }
 }
 
 .close {
     position: absolute;
-    top: 1rem;
+    top: 22px;
     right: 1rem;
     cursor: pointer;
 

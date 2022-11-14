@@ -46,6 +46,7 @@ const useInfiniteScroller = ({
                 fetchData={fetchData}
                 children={children}
                 loading={isLoading}
+                limit={limit}
             />
         ),
         data,

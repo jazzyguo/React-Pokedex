@@ -10,6 +10,7 @@ export {
     selectPokemonById,
     selectEvolutionById,
     selectEvolutionStatusLoading,
+    selectFilteredPokemon,
 } from './selectors'
 
 export {

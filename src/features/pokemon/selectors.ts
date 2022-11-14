@@ -95,7 +95,7 @@ export const selectPokemonById = createSelector(
     (_: any, id: number | string | null) => id,
     (data: Pokemon[], selectedPokemon: Pokemon, id: string | number | null) => {
         if (!id) return null
-        
+
         if (
             selectedPokemon &&
             (selectedPokemon.id === parseInt(id) ||
@@ -108,6 +108,20 @@ export const selectPokemonById = createSelector(
             (pokemon: Pokemon) =>
                 pokemon.id === parseInt(id) ||
                 pokemon.name === id.toLocaleLowerCase()
+        )
+    }
+)
+
+// used to filter pokemon by doing a simple case insensitive string includes check
+// with first letter match
+export const selectFilteredPokemon = createSelector(
+    selectPokemonData,
+    (_: any, filter: string) => filter,
+    (data: Pokemon[], filter: string) => {
+        return data.filter(
+            (pokemon: Pokemon) =>
+                pokemon.name.toLowerCase().includes(filter.toLowerCase()) &&
+                pokemon.name[0] === filter[0]
         )
     }
 )

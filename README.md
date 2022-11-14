@@ -7,6 +7,6 @@ Lists pokemon as well as being able to search on specific pokemon names
 
 Detailed pokemon page view with pokemon information
 
-Contains search, pagination, request caching, lazy loading, error handling, full responsiveness, and more
+Contains search, filtering, pagination, request caching, lazy loading, error handling, full responsiveness, and more
 
 Live Url: https://react-pokedex-2d183.web.app/

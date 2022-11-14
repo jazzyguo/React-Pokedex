@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 
-import SearchTrigger from './SearchTrigger'
-import SearchPopup from './SearchPopup'
+import SearchTrigger from './components/SearchTrigger'
+import SearchPopup from './components/SearchPopup'
 
 /**
  * Handles the importing/exporting of the SearchPopup component
