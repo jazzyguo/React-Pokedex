@@ -56,11 +56,12 @@ type Evolution = {
 }
 
 type Generations = {
-    [key: string]: Generation
+    [key: number]: Generation
 }
 
 type Generation = {
     name: string
+    id: number
     main_region: {
         name: string
     }

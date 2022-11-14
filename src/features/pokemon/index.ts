@@ -9,9 +9,10 @@ export {
     selectOffset,
     selectPokemonById,
     selectFilteredPokemon,
+    selectFilter,
+    selectPokemonListData,
 } from './selectors'
 
-export {
-    fetchPokemons,
-    fetchPokemon,
-} from './thunks'
+export { fetchPokemons, fetchPokemon } from './thunks'
+
+export { setFilter } from './slice'

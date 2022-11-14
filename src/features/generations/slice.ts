@@ -15,6 +15,9 @@ export const initialState: GenerationsReducerState = {
     data: {},
     status: IDLE_STATUS,
     error: undefined,
+    pagination: {
+        count: 0,
+    },
 }
 
 const generationsSlice = createSlice({
@@ -27,6 +30,7 @@ const generationsSlice = createSlice({
             state.status = LOADING_STATUS
         })
         builder.addCase(fetchGeneration.fulfilled, (state, { payload }) => {
+            state.data[payload.id] = payload
             state.error = undefined
             state.status = READY_STATUS
         })
@@ -39,6 +43,16 @@ const generationsSlice = createSlice({
             state.status = LOADING_STATUS
         })
         builder.addCase(fetchGenerations.fulfilled, (state, { payload }) => {
+            const generations = payload.results || []
+            const generationsObject = generations.reduce(
+                (acc, generation, idx) => ({
+                    ...acc,
+                    [idx + 1]: generation,
+                }),
+                {}
+            )
+            state.pagination.count = payload.count
+            state.data = generationsObject
             state.error = undefined
             state.status = READY_STATUS
         })

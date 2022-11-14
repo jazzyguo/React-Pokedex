@@ -18,6 +18,7 @@ const useInfiniteScroller = ({
     hasNextSelector = () => false,
     offsetSelector = () => 0,
     limit = 100,
+    shouldFetch = true,
 }) => {
     const dispatch = useDispatch()
 
@@ -27,17 +28,25 @@ const useInfiniteScroller = ({
     const currOffset = useSelector(offsetSelector)
 
     const fetchData = useCallback(() => {
-        if (isLoading || !hasNext) return
+        if (isLoading || !hasNext || !shouldFetch) return
         dispatch(fetchAction({ offset: currOffset, limit }))
-    }, [currOffset, limit, dispatch, fetchAction, isLoading, hasNext])
+    }, [
+        currOffset,
+        limit,
+        dispatch,
+        fetchAction,
+        isLoading,
+        hasNext,
+        shouldFetch,
+    ])
 
     // on mount, we make sure there is enough data mounted to render a scrollbar
     useEffect(() => {
         const canScroll = document.body.scrollHeight > window.innerHeight
-        if (!canScroll && hasNext) {
+        if (!canScroll && hasNext && shouldFetch) {
             fetchData()
         }
-    }, [hasNext, fetchData])
+    }, [hasNext, fetchData, shouldFetch])
 
     return {
         InfiniteScroller: ({ children, className }) => (

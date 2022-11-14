@@ -2,10 +2,12 @@ import {
     pokemonSliceInitialState,
     pokemonSliceReducer,
 } from '../features/pokemon/slice'
+
 import {
     evolutionsSliceInitialState,
     evolutionsSliceReducer,
 } from '../features/evolutions/slice'
+
 import {
     generationsSliceInitialState,
     generationsSliceReducer,

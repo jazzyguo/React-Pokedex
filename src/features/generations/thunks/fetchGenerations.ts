@@ -3,7 +3,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit'
 import { POKEMON_GENERATIONS_URL } from 'lib/constants/api'
 
 const fetchGenerations = createAsyncThunk<
-    { name: string }[],
+    { results: { name: string }[]; count: number },
     void,
     {
         rejectValue: Error

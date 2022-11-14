@@ -1,8 +1,22 @@
-
 @import "lib/styles/styles.scss";
 
 .logo {
     height: 2.5rem;
     width: max-content;
     margin: auto 0;
+}
+
+.nav {
+    justify-content: space-between;
+}
+
+.loading {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+    width: max-content;
+    height: max-content;
 }

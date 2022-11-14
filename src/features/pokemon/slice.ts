@@ -28,7 +28,11 @@ export const initialState: PokemonReducerState = {
 const pokemonSlice = createSlice({
     name,
     initialState,
-    reducers: {},
+    reducers: {
+        setFilter(state, { payload }) {
+            state.pagination.filter = payload
+        },
+    },
     extraReducers: (builder) => {
         builder.addCase(fetchPokemons.pending, (state, { meta }) => {
             state.error = undefined
@@ -37,10 +41,7 @@ const pokemonSlice = createSlice({
             state.pagination.limit = meta.arg.limit || state.pagination.limit
         })
         builder.addCase(fetchPokemons.fulfilled, (state, { payload }) => {
-            state.data = [
-                ...state.data,
-                ...(payload.results || []),
-            ]
+            state.data = [...state.data, ...(payload.results || [])]
             state.pagination.count = payload.count || 0
             state.pagination.next = payload.next || null
             state.pagination.offset =
@@ -60,9 +61,7 @@ const pokemonSlice = createSlice({
         builder.addCase(fetchPokemon.fulfilled, (state, { payload }) => {
             // lets update the pokemon data if available
             // otherwise save it to the selectedPokemon key
-            const index = state.data.findIndex(
-                (p) => p.name === payload.name
-            )
+            const index = state.data.findIndex((p) => p.name === payload.name)
             if (index !== -1) {
                 state.data[index] = payload
             } else {
@@ -85,5 +84,7 @@ export const pokemonSliceInitialState = {
 export const pokemonSliceReducer = {
     [name]: pokemonSlice.reducer,
 }
+
+export const { setFilter } = pokemonSlice.actions
 
 export default pokemonSlice.reducer

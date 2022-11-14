@@ -1,18 +1,21 @@
 import React from 'react'
 
+import cx from 'classnames'
+
 import styles from './Navbar.module.scss'
 
 type Props = {
     color?: string
     children?: React.ReactNode
+    className?: string
 }
 
 /**
  * Sticky nav, children can be passed in to be rendered
  */
-const Navbar = ({ color = '#fff', children = null }: Props) => (
+const Navbar = ({ color = '#fff', children = null, className = '' }: Props) => (
     <div
-        className={styles.container}
+        className={cx(className, styles.container)}
         style={{
             background: color,
         }}

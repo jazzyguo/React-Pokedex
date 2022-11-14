@@ -26,7 +26,7 @@ const InfiniteScroller = ({
     fetchData = () => {},
     loading = false,
     limit,
-}) => {
+}: Props) => {
     const itemsToRender = limit * 3
 
     const handleScroll = useCallback(() => {
