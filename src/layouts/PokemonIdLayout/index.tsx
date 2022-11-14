@@ -63,13 +63,9 @@ const PokemonIdLayout = () => {
         }
     }, [pokemonData, dispatch])
 
-    if (!currPokemonData) {
-        return null
-    }
+    const { name: _name, id, types = [], stats = [] } = currPokemonData || {}
 
-    const { name: _name, id, types = [], stats = [] } = currPokemonData
-
-    if (!id) {
+    if (!pokemonId) {
         throw new Error('Pokemon ID is missing')
     }
 

@@ -28,7 +28,7 @@ const FilterDropdown = () => {
         { label: 'All', value: 'all' },
         ...Object.keys(generations).map(
             (_, idx) => ({
-                label: `Gen ${idx + 1}`,
+                label: `Gen. ${idx + 1}`,
                 value: idx + 1,
             }),
             []
@@ -70,6 +70,7 @@ const FilterDropdown = () => {
                 options={options}
                 menuPlacement={isMobile ? 'top' : 'bottom'}
                 className={styles.select}
+                isSearchable={false}
             />
         </div>
     )

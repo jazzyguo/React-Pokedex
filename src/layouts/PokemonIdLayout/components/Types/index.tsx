@@ -16,7 +16,7 @@ const PokemonTypes = () => {
         selectPokemonById(state, id)
     )
 
-    const { types = [] } = pokemonData
+    const { types = [] } = pokemonData || {}
 
     return (
         <div className={styles.container}>
