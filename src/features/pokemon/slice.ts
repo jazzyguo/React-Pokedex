@@ -20,7 +20,7 @@ export const initialState: PokemonReducerState = {
         filter: 'all',
     },
     data: [],
-    selectedPokemon: null,
+    selectedPokemons: [],
     status: IDLE_STATUS,
     error: undefined,
 }
@@ -60,12 +60,13 @@ const pokemonSlice = createSlice({
         })
         builder.addCase(fetchPokemon.fulfilled, (state, { payload }) => {
             // lets update the pokemon data if available
-            // otherwise save it to the selectedPokemon key
+            // otherwise save it to a selectedPokemons array
+            // this way we dont pollute the main pokemon data
             const index = state.data.findIndex((p) => p.name === payload.name)
             if (index !== -1) {
                 state.data[index] = payload
             } else {
-                state.selectedPokemon = payload
+                state.selectedPokemons = [...state.selectedPokemons, payload]
             }
             state.error = undefined
             state.status = READY_STATUS

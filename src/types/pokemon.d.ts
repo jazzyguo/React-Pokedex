@@ -89,7 +89,7 @@ type PokemonReducerState = {
         filter: string
     }
     data: Pokemon[]
-    selectedPokemon: Pokemon | null
+    selectedPokemons: Pokemon[]
     status: 'idle' | 'loading' | 'ready' | 'error'
     error: string | undefined
 }

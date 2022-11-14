@@ -53,9 +53,9 @@ export const selectOffset = createSelector(
     ({ pagination }) => pagination?.offset || 0
 )
 
-export const selectSelectedPokemon = createSelector(
+export const selectSelectedPokemons = createSelector(
     selectSelf,
-    ({ selectedPokemon }) => selectedPokemon
+    ({ selectedPokemons }) => selectedPokemons
 )
 
 // this selects pokemon from the main data array
@@ -65,24 +65,26 @@ export const selectSelectedPokemon = createSelector(
 // a number string or a pokemon's name
 export const selectPokemonById = createSelector(
     selectPokemonData,
-    selectSelectedPokemon,
+    selectSelectedPokemons,
     (_: any, id: string | null) => id,
-    (data: Pokemon[], selectedPokemon: Pokemon, id: string | null) => {
+    (data: Pokemon[], selectedPokemons: Pokemon[], id: string | null) => {
         if (!id) return null
 
-        if (
-            selectedPokemon &&
-            (selectedPokemon.id === parseInt(id) ||
-                selectedPokemon.name === id.toLocaleLowerCase())
-        ) {
-            return selectedPokemon
+        let foundPokemon
+
+        const isMatch = (pokemon: Pokemon) =>
+            pokemon.id === parseInt(id) ||
+            pokemon.name === id.toLocaleLowerCase()
+
+        if (!!selectedPokemons.length) {
+            foundPokemon = selectedPokemons.find(isMatch)
         }
 
-        return data.find(
-            (pokemon: Pokemon) =>
-                pokemon.id === parseInt(id) ||
-                pokemon.name === id.toLocaleLowerCase()
-        )
+        if (!foundPokemon) {
+            foundPokemon = data.find(isMatch)
+        }
+
+        return foundPokemon
     }
 )
 

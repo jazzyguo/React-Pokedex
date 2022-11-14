@@ -10,10 +10,10 @@ import { TYPE_COLORS } from 'lib/constants/pokemonTypes'
 import styles from './Types.module.scss'
 
 const PokemonTypes = () => {
-    const { id } = useParams()
+    const { id: pokemonId } = useParams()
 
     const pokemonData: Pokemon = useSelector((state) =>
-        selectPokemonById(state, id)
+        selectPokemonById(state, pokemonId)
     )
 
     const { types = [] } = pokemonData || {}

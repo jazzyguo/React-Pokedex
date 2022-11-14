@@ -30,7 +30,7 @@ const Evolutions = ({ id }: Props) => {
     const isLoading = useSelector(selectEvolutionStatusLoading)
 
     useEffect(() => {
-        if (!evolutionData) {
+        if (!evolutionData && id) {
             dispatch(fetchEvolutions(id))
         }
     }, [evolutionData, id, dispatch])
