@@ -1,3 +1,5 @@
+import { combineReducers } from '@reduxjs/toolkit'
+
 import {
     pokemonSliceInitialState,
     pokemonSliceReducer,
@@ -19,10 +21,10 @@ export const initialAppState = {
     ...generationsSliceInitialState,
 }
 
-const rootReducer = {
+const rootReducer = combineReducers({
     ...pokemonSliceReducer,
     ...evolutionsSliceReducer,
     ...generationsSliceReducer,
-}
+})
 
 export default rootReducer

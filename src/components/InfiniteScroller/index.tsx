@@ -22,6 +22,7 @@ const InfiniteScroller = ({
     fetchData = () => {},
     loading = false,
 }: Props) => {
+    
     // check if we can scroll, if not, fetch more data,
     // this is to make sure we have enough data to render a scrollbar
     // so that the user can execute the infinite scroller fetch mechanism

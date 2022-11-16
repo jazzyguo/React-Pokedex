@@ -1,12 +1,13 @@
 import React, { Suspense } from 'react'
 import ReactDOM from 'react-dom/client'
-import './index.css'
+import { PersistGate } from 'redux-persist/integration/react'
 
-import { store } from './store'
+import { store, persistor } from './store'
 import { Provider } from 'react-redux'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 
 import Root from './root'
+import './index.css'
 
 import PokemonIdAbilitiesPage from 'pages/pokemon/[id]/abilities'
 
@@ -48,7 +49,9 @@ if (rootElement) {
     root.render(
         <Provider store={store}>
             <Suspense fallback={null}>
-                <RouterProvider router={router} />
+                <PersistGate loading={null} persistor={persistor}>
+                    <RouterProvider router={router} />
+                </PersistGate>
             </Suspense>
         </Provider>
     )

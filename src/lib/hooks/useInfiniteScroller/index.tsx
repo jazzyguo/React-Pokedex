@@ -6,6 +6,8 @@ import InfiniteScroller from 'components/InfiniteScroller'
 
 import { DEFAULT_LIMIT } from 'lib/constants/api'
 
+import { debounce } from 'lodash'
+
 type Props = {
     fetchAction: (props: any) => any
     dataSelector: (state: any) => any
@@ -39,7 +41,7 @@ const useInfiniteScroller = ({
     const hasNext = useSelector(hasNextSelector)
     const currOffset = useSelector(offsetSelector)
 
-    const fetchData = useCallback(() => {
+    const _fetchData = useCallback(() => {
         if (isLoading || !hasNext || !shouldFetch) return
         dispatch(fetchAction({ offset: currOffset, limit }))
     }, [
@@ -52,7 +54,10 @@ const useInfiniteScroller = ({
         shouldFetch,
     ])
 
+    const fetchData = debounce(_fetchData, 200)
+
     // on mount, we make sure there is enough data mounted to render a scrollbar
+    // so that a user can scroll down to trigger the infinite scroller
     useEffect(() => {
         const canScroll = document.body.scrollHeight > window.innerHeight
         if (!canScroll && hasNext && shouldFetch) {
