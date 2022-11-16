@@ -9,9 +9,9 @@ import { DEFAULT_LIMIT } from 'lib/constants/api'
 type Props = {
     fetchAction: (props: any) => any
     dataSelector: (state: any) => any
-    loadingSelector: (state: any) => any
-    hasNextSelector: (state: any) => any
-    offsetSelector: (state: any) => any
+    loadingSelector: (state: any) => boolean
+    hasNextSelector: (state: any) => boolean
+    offsetSelector: (state: any) => number
     limit?: number
     shouldFetch?: boolean
 }
