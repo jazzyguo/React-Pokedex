@@ -13,7 +13,7 @@ const useSearchPopup = () => {
     const [isOpen, setIsOpen] = useState(false)
 
     return {
-        SearchTrigger: ({ className }) => (
+        SearchTrigger: ({ className = '' }: { className?: string }) => (
             <SearchTrigger setIsOpen={setIsOpen} className={className} />
         ),
         SearchPopup: () => (

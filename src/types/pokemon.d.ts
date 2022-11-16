@@ -1,10 +1,14 @@
-type Pokemon = {
-    name: string
-    id?: number
-    abilities?: Ability[]
-    types?: PokemonType[]
-    stats?: Stat[]
-}
+type Pokemon =
+    | {
+          name: string
+          url: string
+          id?: number
+          abilities?: Ability[]
+          types?: PokemonType[]
+          stats?: Stat[]
+      }
+    | null
+    | undefined
 
 type PokemonType = {
     type: {
@@ -43,30 +47,38 @@ type Species = {
     url: string
 }
 
+type EvolutionChain =
+    | {
+          evolves_to: Evolution[]
+          evolution_details: EvolutionDetail[]
+          species: Species
+      }
+    | undefined
+    | null
+
 type Evolution = {
-    id: number
+    id?: number
     evolution_details?: EvolutionDetail[]
     evolves_to?: Evolution[]
     species?: Species
-    chain: {
-        evolves_to: Evolution[]
-        evolution_details: EvolutionDetail[]
-        species: Species
-    }
+    chain?: EvolutionChain
 }
 
 type Generations = {
-    [key: number]: Generation
+    [key: string]: Generation
 }
 
-type Generation = {
-    name: string
-    id: number
-    main_region: {
-        name: string
-    }
-    pokemon_species: Species[]
-}
+type Generation =
+    | {
+          name: string
+          id: number
+          main_region: {
+              name: string
+          }
+          pokemon_species: Species[]
+      }
+    | null
+    | undefined
 
 type EvolutionsReducerState = {
     data: Evolution[]
@@ -78,6 +90,9 @@ type GenerationsReducerState = {
     data: Generations
     status: 'idle' | 'loading' | 'ready' | 'error'
     error: string | undefined
+    pagination: {
+        count: number
+    }
 }
 
 type PokemonReducerState = {

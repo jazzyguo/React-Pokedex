@@ -8,6 +8,7 @@
       "outDir": "lib", // .js (as well as .d.ts, .js.map, etc.) files will be emitted into this directory.,
       "removeComments": true, // Strips all comments from TypeScript files when converting into JavaScript- you rarely read compiled code so this saves space
       "target": "ES6", // Target environment. Most modern browsers support ES6, but you may want to set it to newer or older. (defaults to ES3)
+      "module": "esnext", // Module system to use. (defaults to "commonjs")
       "jsx": "react", // Specifies the JSX code generation. (defaults to "preserve")
 
       // Module resolution
@@ -20,7 +21,8 @@
         "features/*": ["features/*"],
         "lib/*": ["lib/*"],
         "pages/*": ["pages/*"],
-        "assets/*": ["assets/*"]
+        "assets/*": ["assets/*"],
+        "store/*": ["store/*"],
       },  
       // Source Map
       "sourceMap": true, // enables the use of source maps for debuggers and error reporting etc
@@ -39,10 +41,13 @@
       "noUnusedParameters": true, // Report errors on unused parameters in functions
 
       "types": [
-        "types/pokemon.d.ts"
+        "types/index.d.ts",
+        "types/pokemon.d.ts",
+        "node",
+        "lodash",
       ]
     },
-    "include": ["./**/*.ts, ./**/*.tsx"],
+    "include": ["./**/*.ts", "./**/*.tsx", "./assets"],
     "exclude": [
       "node_modules/**/*"
     ]

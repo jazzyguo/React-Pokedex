@@ -4,7 +4,7 @@ import { POKEMON_LIST_URL } from 'lib/constants/api'
 
 const fetchPokemon = createAsyncThunk<
     Pokemon,
-    string | number | null,
+    string | number | null | undefined,
     {
         rejectValue: Error
     }

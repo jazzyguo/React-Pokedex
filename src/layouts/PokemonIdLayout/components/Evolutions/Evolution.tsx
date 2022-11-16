@@ -11,7 +11,7 @@ import ArrowSvg from 'assets/svg/Arrow'
 import styles from './Evolutions.module.scss'
 
 type Props = {
-    id: number | undefined
+    id: string | undefined
     details?: EvolutionDetail[]
     chain: Evolution // acts as the children of the current evolution
     name?: string
@@ -45,7 +45,7 @@ const Evolution = ({ id, details = [], chain, name = '' }: Props) => {
                         <ArrowSvg />
                     </span>
                     {evolvesTo.map(
-                        (evolution) =>
+                        (evolution: Evolution) =>
                             evolution && (
                                 <Evolution
                                     key={evolution?.species?.name}

@@ -1,10 +1,20 @@
 import React, { useCallback, useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
+import { useAppDispatch } from 'store'
 
 import InfiniteScroller from 'components/InfiniteScroller'
 
 import { DEFAULT_LIMIT } from 'lib/constants/api'
 
+type Props = {
+    fetchAction: (props: any) => any
+    dataSelector: (state: any) => any
+    loadingSelector: (state: any) => any
+    hasNextSelector: (state: any) => any
+    offsetSelector: (state: any) => any
+    limit?: number
+    shouldFetch?: boolean
+}
 /**
  *
  * @param fetchAction action creator to fetch data
@@ -15,14 +25,14 @@ import { DEFAULT_LIMIT } from 'lib/constants/api'
  */
 const useInfiniteScroller = ({
     fetchAction = (props) => props,
-    dataSelector = () => [],
-    loadingSelector = () => false,
-    hasNextSelector = () => false,
-    offsetSelector = () => 0,
+    dataSelector = (data = []) => data,
+    loadingSelector = (loading = false) => loading,
+    hasNextSelector = (hasNext = false) => hasNext,
+    offsetSelector = (offset = 0) => offset,
     limit = DEFAULT_LIMIT,
     shouldFetch = true,
-}) => {
-    const dispatch = useDispatch()
+}: Props) => {
+    const dispatch = useAppDispatch()
 
     const data = useSelector(dataSelector)
     const isLoading = useSelector(loadingSelector)
@@ -51,7 +61,13 @@ const useInfiniteScroller = ({
     }, [hasNext, fetchData, shouldFetch])
 
     return {
-        InfiniteScroller: ({ children, className }) => (
+        InfiniteScroller: ({
+            children,
+            className,
+        }: {
+            children: React.ReactNode
+            className: string
+        }) => (
             <InfiniteScroller
                 className={className}
                 fetchData={fetchData}

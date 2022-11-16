@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 import Select from 'react-select'
+import { useAppDispatch } from 'store'
 
 import {
     fetchGenerations,
@@ -12,20 +13,27 @@ import { selectFilter, setFilter } from 'features/pokemon'
 
 import styles from './FilterDropdown.module.scss'
 
+type Option = {
+    label: string
+    value: string | number
+}
+
 /**
  * Handles filtering and displaying of pokemon list
  * Based on generational data
  * Also handles fetching of generations data
  */
 const FilterDropdown = () => {
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
 
     const currentFilter = useSelector(selectFilter)
     const generations: Generations = useSelector(selectGenerationsData)
     const generationsCount = useSelector(selectGenerationsCount)
 
+    const allValue = { label: 'All', value: 'all' }
+
     const options = [
-        { label: 'All', value: 'all' },
+        allValue,
         ...Object.keys(generations).map(
             (_, idx) => ({
                 label: `Gen. ${idx + 1}`,
@@ -35,18 +43,17 @@ const FilterDropdown = () => {
         ),
     ]
 
-    const defaultValue = options.find(
-        (option) => option.value === currentFilter
-    )
+    const defaultValue =
+        options.find((option) => option.value === currentFilter) || allValue
 
-    const [selectedOption, setSelectedOption] = useState(defaultValue)
+    const [selectedOption, setSelectedOption] = useState<Option>(defaultValue)
 
     // fetch generational data to use for dropdown
     useEffect(() => {
         if (!generationsCount) {
             dispatch(fetchGenerations())
         }
-    }, [dispatch])
+    }, [dispatch, generationsCount])
 
     // update filter in store when dropdown changes
     // as well as fetch the generation data if it doesn't exist

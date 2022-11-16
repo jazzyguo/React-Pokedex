@@ -1,15 +1,17 @@
-export const unslug = (slug: string) => {
+export const unslug = (slug: string | undefined) => {
     if (typeof slug !== 'string') return slug
 
     const words = (slug || '').split('-')
-    return words
+    const result: string = words
         .map((word = '') => {
             return (word[0] || '').toUpperCase() + word.slice(1)
         })
         .join(' ')
+    return result || ''
 }
 
-export const getPokemonIdFromUrl = (url: string) => {
+export const getPokemonIdFromUrl = (url: string | undefined) => {
     const parts = (url || '').split('/')
-    return parts[parts.length - 2]
+    const result: string = parts[parts.length - 2] || ''
+    return result
 }

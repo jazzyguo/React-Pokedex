@@ -12,7 +12,9 @@ type Props = {
 // depending on the trigger name
 // the value can be different and involve different wordings
 // ie 'use-item' should involve item.name for Use Item (item.name)
-const TRIGGER_MAP = {
+const TRIGGER_MAP: {
+    [key: string]: { key: string; text: string }[]
+} = {
     'level-up': [
         {
             key: 'min_level',
@@ -50,7 +52,7 @@ const EvolutionDetails = ({ details = [] }: Props) => {
                 // and return the first found value
                 const { value: triggerKeyValue, text } =
                     triggerKeysToCheck.reduce(
-                        (foundValue, { key, text }) =>
+                        (foundValue: any, { key, text }) =>
                             foundValue?.value
                                 ? foundValue
                                 : {

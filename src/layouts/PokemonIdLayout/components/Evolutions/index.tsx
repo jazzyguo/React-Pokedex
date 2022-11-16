@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
+import { useAppDispatch } from 'store'
 
 import Loading from 'components/Loading'
 import Evolution from './Evolution'
@@ -15,7 +16,7 @@ import { getPokemonIdFromUrl, unslug } from 'lib/utils/strings'
 import styles from './Evolutions.module.scss'
 
 type Props = {
-    id: number
+    id: number | undefined
 }
 
 /**
@@ -23,9 +24,11 @@ type Props = {
  * Links to a pokemon in the tree if clicked
  */
 const Evolutions = ({ id }: Props) => {
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
 
-    const evolutionData = useSelector((state) => selectEvolutionById(state, id))
+    const evolutionData: Evolution | undefined = useSelector((state) =>
+        selectEvolutionById(state, id)
+    )
 
     const isLoading = useSelector(selectEvolutionStatusLoading)
 
@@ -35,9 +38,9 @@ const Evolutions = ({ id }: Props) => {
         }
     }, [evolutionData, id, dispatch])
 
-    const { chain = {} } = evolutionData || {}
+    const { chain } = evolutionData || {}
 
-    const canEvolve = !!chain.evolves_to?.length
+    const canEvolve = !!chain?.evolves_to?.length
 
     return (
         <div className={styles.container}>

@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
+import { useAppDispatch } from 'store'
 import { useParams, Outlet } from 'react-router-dom'
 
 import {
@@ -27,7 +28,7 @@ import { TYPE_COLORS } from 'lib/constants/pokemonTypes'
 import styles from './PokemonIdLayout.module.scss'
 
 const PokemonIdLayout = () => {
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
 
     const { id: pokemonId } = useParams()
 
@@ -36,7 +37,7 @@ const PokemonIdLayout = () => {
     const isLoading = useSelector(selectPokemonStatusLoading)
 
     const pokemonData: Pokemon[] = useSelector(selectPokemonData)
-    const currPokemonData: Pokemon = useSelector((state) =>
+    const currPokemonData = useSelector((state) =>
         selectPokemonById(state, pokemonId)
     )
 
@@ -71,7 +72,8 @@ const PokemonIdLayout = () => {
 
     const name = unslug(_name)
 
-    const color = TYPE_COLORS[types[0]?.type?.name]
+    const typeName: string | undefined = types[0]?.type?.name
+    const color: string = typeName ? TYPE_COLORS[typeName] || '' : ''
 
     return (
         <div className={styles.layout}>

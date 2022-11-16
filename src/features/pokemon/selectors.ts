@@ -66,15 +66,15 @@ export const selectSelectedPokemons = createSelector(
 export const selectPokemonById = createSelector(
     selectPokemonData,
     selectSelectedPokemons,
-    (_: any, id: string | null) => id,
-    (data: Pokemon[], selectedPokemons: Pokemon[], id: string | null) => {
+    (_: any, id: string | null | undefined) => id,
+    (data: Pokemon[], selectedPokemons: Pokemon[], id) => {
         if (!id) return null
 
-        let foundPokemon
+        let foundPokemon: Pokemon | undefined | null
 
         const isMatch = (pokemon: Pokemon) =>
             // only if id is on the pokemon object, then we know it was fetched from the api
-            pokemon.id &&
+            pokemon?.id &&
             (pokemon.id === parseInt(id) ||
                 pokemon.name === id.toLocaleLowerCase())
 
@@ -101,7 +101,10 @@ export const selectFilteredPokemon = createSelector(
         const toSearch = filter.toLocaleLowerCase()
 
         return data.filter((pokemon: Pokemon) => {
-            const pokemonName = unslug(pokemon?.name || '').toLocaleLowerCase()
+            const pokemonName = (
+                unslug(pokemon?.name) || ''
+            ).toLocaleLowerCase()
+
             return (
                 pokemonName &&
                 pokemonName.includes(toSearch) &&
@@ -121,13 +124,15 @@ export const selectPokemonListData = createSelector(
     (filter: string, pokemonData: Pokemon[], generationsData: Generations) => {
         if (filter === 'all') return pokemonData
 
-        const generation = generationsData[filter]
+        const generation: Generation = generationsData[filter]
 
         if (!generation) return []
 
         // sort pokemon by id
         const generationPokemon = [...generation.pokemon_species].sort(
-            (a, b) => getPokemonIdFromUrl(a.url) - getPokemonIdFromUrl(b.url)
+            (a, b) =>
+                parseInt(getPokemonIdFromUrl(a.url)) -
+                parseInt(getPokemonIdFromUrl(b.url))
         )
 
         return generationPokemon
@@ -135,6 +140,6 @@ export const selectPokemonListData = createSelector(
 )
 
 export const selectPage = createSelector(
-    selectSelf, 
+    selectSelf,
     ({ pagination }) => pagination?.page || 1
 )

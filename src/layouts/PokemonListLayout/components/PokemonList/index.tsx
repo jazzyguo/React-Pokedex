@@ -38,15 +38,15 @@ const PokemonList = () => {
     return (
         <InfiniteScroller className={styles.pokemonList}>
             {data &&
-                data.map((pokemon) => {
-                    const id = pokemon.id || getPokemonIdFromUrl(pokemon.url)
+                data.map((pokemon: Pokemon) => {
+                    const id = pokemon?.id || getPokemonIdFromUrl(pokemon?.url)
                     const baseSpriteUrl = getSpriteImageUrl(id)
                     const shinySpriteUrl = getSpriteImageUrl(id, {
                         shiny: true,
                     })
                     return (
                         <div
-                            key={pokemon.name}
+                            key={pokemon?.name}
                             className={styles.pokemonList_item}
                             onClick={() => navigate(`/pokemon/${id}`)}
                         >
@@ -58,13 +58,13 @@ const PokemonList = () => {
                                 onMouseOut={(e) => {
                                     e.currentTarget.src = baseSpriteUrl
                                 }}
-                                alt={pokemon.name}
+                                alt={pokemon?.name}
                             />
                             <span className={styles.pokemonList_item_number}>
                                 #{id}
                             </span>
                             <span className={styles.pokemonList_item_name}>
-                                {unslug(pokemon.name)}
+                                {unslug(pokemon?.name)}
                             </span>
                         </div>
                     )

@@ -20,22 +20,32 @@ type Props = {
 const SearchResults = ({ data = [], setIsOpen = () => {} }: Props) => (
     <div className={styles.container}>
         {!!data.length ? (
-            data.map(({ id: _id, name, url }) => {
-                const id = _id || getPokemonIdFromUrl(url)
-                const spriteUrl = getSpriteImageUrl(id)
-                if (!id) return null
-                return (
-                    <Link
-                        to={`/pokemon/${id}`}
-                        key={id}
-                        className={styles.container_item}
-                        onClick={() => setIsOpen(false)}
-                    >
-                        <img src={spriteUrl} alt={name} />
-                        <span>{unslug(name)}</span>
-                    </Link>
-                )
-            })
+            data.map(
+                ({
+                    id: _id,
+                    name,
+                    url,
+                }: {
+                    id: number
+                    name: string
+                    url: string
+                }) => {
+                    const id = _id || getPokemonIdFromUrl(url)
+                    const spriteUrl = getSpriteImageUrl(id)
+                    if (!id) return null
+                    return (
+                        <Link
+                            to={`/pokemon/${id}`}
+                            key={id}
+                            className={styles.container_item}
+                            onClick={() => setIsOpen(false)}
+                        >
+                            <img src={spriteUrl} alt={name} />
+                            <span>{unslug(name)}</span>
+                        </Link>
+                    )
+                }
+            )
         ) : (
             <div className={styles.empty}>
                 <img src={snorlax} alt="Snorlax" />

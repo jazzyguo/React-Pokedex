@@ -1,6 +1,6 @@
 import React from 'react'
 
-const ArrowSvg = (props) => (
+const ArrowSvg = (props: any) => (
     <svg
         width={24}
         height={24}

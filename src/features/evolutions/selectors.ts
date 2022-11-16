@@ -31,8 +31,8 @@ export const selectEvolutionError = createSelector(
 
 export const selectEvolutionById = createSelector(
     selectEvolutionData,
-    (_: any, id: number) => id,
-    (data: Evolution[], id: number) => {
+    (_: any, id: number | undefined) => id,
+    (data: Evolution[], id) => {
         return data.find((e) => e.id === id)
     }
 )

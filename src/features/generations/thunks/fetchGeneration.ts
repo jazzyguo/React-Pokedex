@@ -4,7 +4,7 @@ import { POKEMON_GENERATIONS_URL } from 'lib/constants/api'
 
 const fetchGeneration = createAsyncThunk<
     Generation,
-    string | null,
+    string | number,
     {
         rejectValue: Error
     }

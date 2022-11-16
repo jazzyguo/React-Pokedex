@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
+import { useAppDispatch } from 'store'
 
 import Loading from 'components/Loading'
 
@@ -33,7 +34,7 @@ const InfiniteScroller = ({
     loading = false,
     limit = DEFAULT_LIMIT,
 }: Props) => {
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
 
     const page: number = useSelector(selectPage)
     const count: number = React.Children.count(children)
@@ -52,8 +53,8 @@ const InfiniteScroller = ({
             document.documentElement
         if (scrollTop + clientHeight >= scrollHeight) {
             debouncedFetch()
-            if(page < maxPage) {
-               // dispatch(setPage(page + 1))
+            if (page < maxPage) {
+                // dispatch(setPage(page + 1))
             }
         }
         if (scrollTop === 0) {

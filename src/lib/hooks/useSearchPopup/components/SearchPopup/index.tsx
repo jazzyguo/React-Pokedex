@@ -1,5 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
+import { useAppDispatch } from 'store'
 
 import {
     fetchPokemons,
@@ -34,7 +35,7 @@ const SearchPopup = ({ isOpen = false, setIsOpen = () => {} }: Props) => {
 
     const [query, setQuery] = useState('')
 
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
 
     const count = useSelector(selectCount)
     const hasNext = useSelector(selectHasNext)

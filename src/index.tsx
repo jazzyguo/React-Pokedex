@@ -18,14 +18,14 @@ const router = createBrowserRouter([
     {
         path: '/',
         element: <Root />,
-        errorElement: <ErrorPage/>,
+        errorElement: <ErrorPage />,
         children: [
             {
                 index: true,
                 element: <IndexPage />,
             },
             {
-                element: <PokemonIdLayout />, 
+                element: <PokemonIdLayout />,
                 children: [
                     {
                         path: 'pokemon/:id/',
@@ -40,11 +40,16 @@ const router = createBrowserRouter([
     },
 ])
 
-const root = ReactDOM.createRoot(document.getElementById('root'))
-root.render(
-    <Provider store={store}>
-        <Suspense fallback={null}>
-            <RouterProvider router={router} />
-        </Suspense>
-    </Provider>
-)
+const rootElement: HTMLElement | null = document.getElementById('root')
+
+if (rootElement) {
+    const root = ReactDOM.createRoot(rootElement)
+
+    root.render(
+        <Provider store={store}>
+            <Suspense fallback={null}>
+                <RouterProvider router={router} />
+            </Suspense>
+        </Provider>
+    )
+}

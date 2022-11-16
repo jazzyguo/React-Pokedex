@@ -1,9 +1,11 @@
 import React from 'react'
 
 type Props = {
-    data: Ability[]
+    data?: Ability[]
 }
 
-const PokemonIdAbilities = ({ data }: Props) => <div>Abilities</div>
-
+const PokemonIdAbilities = ({ data }: Props) => {
+    console.log({ data })
+    return <div>Abilities</div>
+}
 export default React.memo(PokemonIdAbilities)

@@ -30,7 +30,9 @@ const generationsSlice = createSlice({
             state.status = LOADING_STATUS
         })
         builder.addCase(fetchGeneration.fulfilled, (state, { payload }) => {
-            state.data[payload.id] = payload
+            if (payload?.id) {
+                state.data[payload.id] = payload
+            }
             state.error = undefined
             state.status = READY_STATUS
         })

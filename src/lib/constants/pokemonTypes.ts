@@ -26,7 +26,9 @@ export const SPECIAL_ATTACK_STAT = 'special-attack'
 export const SPECIAL_DEFENSE_STAT = 'special-defense'
 export const SPEED_STAT = 'speed'
 
-export const TYPE_COLORS = {
+export const TYPE_COLORS: {
+    [key: string]: string
+} = {
     [NORMAL_TYPE]: '#A8A878',
     [FIGHTING_TYPE]: '#C03028',
     [FLYING_TYPE]: '#A890F0',
@@ -49,7 +51,9 @@ export const TYPE_COLORS = {
     [SHADOW_TYPE]: '#705898',
 }
 
-export const STAT_COLORS = {
+export const STAT_COLORS: {
+    [key: string]: string
+} = {
     [ATTACK_STAT]: '#F08030',
     [DEFENSE_STAT]: '#E0C068',
     [SPECIAL_DEFENSE_STAT]: '#6890F0',
