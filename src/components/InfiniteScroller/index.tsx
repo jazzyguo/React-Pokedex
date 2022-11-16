@@ -1,14 +1,7 @@
 import React, { useCallback, useEffect } from 'react'
-import { useSelector } from 'react-redux'
-import { useAppDispatch } from 'store'
 
 import Loading from 'components/Loading'
 
-import { selectPage, setPage } from 'features/pokemon'
-
-import { DEFAULT_LIMIT } from 'lib/constants/api'
-
-import { debounce } from 'lodash'
 import styles from './InfiniteScroller.module.scss'
 
 type Props = {
@@ -22,54 +15,24 @@ type Props = {
 /**
  * Handle infinite scrolling and fetching of data
  * when the user scrolls to the bottom
- *
- * Will only show a number of items at a time on a page based on limit * 3
- * to reduce the amount of items rendered at once
- * This is achieved by saving a page number in the store and slicing children
  */
 const InfiniteScroller = ({
     className = '',
     children = null,
     fetchData = () => {},
     loading = false,
-    limit = DEFAULT_LIMIT,
 }: Props) => {
-    const dispatch = useAppDispatch()
-
-    const page: number = useSelector(selectPage)
-    const count: number = React.Children.count(children)
-
-    const itemsToRender = limit * 3
-
-    const maxPage = Math.ceil(count / itemsToRender)
-
-    const debouncedFetch = debounce(fetchData, 200)
-
-    console.log({ page, itemsToRender, count, maxPage })
-
-    // as well as fetching for more data if the bottom is reached and there is more data to fetch
+    // check if we can scroll, if not, fetch more data,
+    // this is to make sure we have enough data to render a scrollbar
+    // so that the user can execute the infinite scroller fetch mechanism
+    // - fetching for more data if the bottom is reached and there is more data to fetch
     const handleScroll = useCallback(() => {
         const { scrollTop, scrollHeight, clientHeight } =
             document.documentElement
         if (scrollTop + clientHeight >= scrollHeight) {
-            debouncedFetch()
-            if (page < maxPage) {
-                // dispatch(setPage(page + 1))
-            }
+            fetchData()
         }
-        if (scrollTop === 0) {
-            if (page > 1) {
-                dispatch(setPage(page - 1))
-            }
-        }
-    }, [debouncedFetch, page, dispatch, maxPage])
-
-    // in order to keep track of the page, we fire off actions to update the page number
-    // in store upon reaching the top or bottom of the page. we know we just reached the bottom
-    // and the page number must increase when we see that maxPage is greater than the current page
-    //
-    // the page always gets set back to 1 on dropdown filter selection in
-    // src/layouts/PokemonListLayout/components/FilterDropdown
+    }, [fetchData])
 
     useEffect(() => {
         window.addEventListener('scroll', handleScroll)
@@ -78,10 +41,7 @@ const InfiniteScroller = ({
 
     return (
         <div className={className}>
-            {React.Children.toArray(children).slice(
-                (page - 1) * itemsToRender,
-                page * itemsToRender
-            )}
+            {children}
             {loading && <Loading className={styles.loading} />}
         </div>
     )

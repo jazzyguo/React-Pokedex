@@ -138,8 +138,3 @@ export const selectPokemonListData = createSelector(
         return generationPokemon
     }
 )
-
-export const selectPage = createSelector(
-    selectSelf,
-    ({ pagination }) => pagination?.page || 1
-)

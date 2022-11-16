@@ -18,7 +18,6 @@ export const initialState: PokemonReducerState = {
         limit: 0,
         next: null,
         filter: 'all',
-        page: 1,
     },
     data: [],
     selectedPokemons: [],
@@ -32,9 +31,6 @@ const pokemonSlice = createSlice({
     reducers: {
         setFilter(state, { payload }) {
             state.pagination.filter = payload
-        },
-        setPage(state, { payload }) {
-            state.pagination.page = payload
         },
     },
     extraReducers: (builder) => {
@@ -89,6 +85,6 @@ export const pokemonSliceReducer = {
     [name]: pokemonSlice.reducer,
 }
 
-export const { setFilter, setPage } = pokemonSlice.actions
+export const { setFilter } = pokemonSlice.actions
 
 export default pokemonSlice.reducer
