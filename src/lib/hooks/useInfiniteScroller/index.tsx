@@ -24,6 +24,8 @@ type Props = {
  * @param loadingSelector selector to get loading status from redux store
  * @param hasNextSelector selector to get hasNext status from redux store
  * @returns
+ *    InfiniteScroller {Component} to render in parent component
+ *    data {any[]} children of the above <InfiniteScroller> rendered however the parent component defines
  */
 const useInfiniteScroller = ({
     fetchAction = (props) => props,
